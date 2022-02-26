@@ -1,0 +1,43 @@
+\section*{Appendix D: Common Electric Fields and Potentials}
+\addcontentsline{toc}{section}{Appendix D: Electric Fields and Potentials}
+For objects of finite charge, I will either express them in terms of their charge density (stated) or in terms of their total charge $q$. In each of the following setups, I will use the distance from a point to a line as $y$, the distance from a point to a plane as $z$, the radius of anything circular as $R$, and the distance to an axis of symmetry or center as $r$. For potential fields, for infinite charge distributions, assume that at the outermost surface of the object the potential is $0$, whereas for finite distributions the potential is set to $0$ at infinity. 
+For the dipole, the general expression of the electric field is too complex to include here, but the potential field's general expression is simple enough. As such, I've assumed the point is on the axis of symmetry for the electric field. I've also included the approximations of fields where the point is very far from the structure, which will be noted. 
+\begin{center}
+	\begin{tabular}{m{4cm} c c}
+		\centering Description & Electric Field & Potential Field \\ \hline \hline \noalign{\smallskip}
+		\centering Point Charge & $E = \frac{kq}{r^2}$ & $V = \frac{kq}{r}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Dipole (with dipole moment $\vec p = q\vec d$, $\theta$ angle with dipole moment) & \makecell{$E = \frac{8kp}{(4y^2 + d^2)^{3/2}}$ \\(Far field $E = \frac{kp}{y^3}$)}& $V = \frac{kp\cos \theta}{r^2}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering On Axis of Uniform Ring Charge & \makecell{$E = \frac{kqy}{(R^2 + y^2)^{3/2}}$\\(Far field $E = \frac{kq}{y^2}$)} & $V = \frac{kQ}{\sqrt{R^2 + y^2}}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Infinite Uniform Line Charge (charge per unit length $\lambda$)& $E = \frac{2k \lambda}{y}$& $V = 2k\lambda \ln \left(\frac{R}{r} \right)$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Disk of Charge & \makecell{$E = \frac{2kq}{R^2}\left(1-\frac{y}{\sqrt{y^2+R^2}}\right)$ \\(Far field $E = \frac{kq}{y^2}$)}& $V = \frac{2kq(\sqrt{y^2+R^2}-y)}{R^2}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Thin Spherical Shell&\makecell{$E= \frac{kq}{r^2}$ (Outside Shell)\\ $E=0$ (Inside Shell)}&\makecell{$V= \frac{kq}{r}$ (Outside Shell)\\ $V= \frac{kq}{R}$ (Inside Shell)}\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Solid Sphere& \makecell{$E= \frac{kq}{r^2}$ (Outside the Sphere)\\ $E=\frac{kqr}{R^3}$ (Inside Sphere)} &\makecell{$V= \frac{kq}{r}$ (Outside Sphere)\\ $V=\frac{kq}{2R}\left(3 - \frac{r^2}{R^2}\right)$ (Inside Sphere)}\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Thick Spherical Shell (inner radius $a$, outer radius $b$, uniform density $\rho$)& \makecell{$E= \frac{\rho(b^3-a^3)}{3r^2 \epsilon_0}$ (Outside Shell)\\ $E=\frac{\rho(r^3-a^3)}{3r^2 \epsilon_0}$ (Between Layers) \\ $E=0$ (Inside Sphere)} & \makecell{$V= \frac{\rho(b^3-a^3)}{3r \epsilon_0}$ (Outside Shell)\\ $V = \frac{\rho(3rb^2 - 2a^3 - r^3)}{6r\epsilon_0}$ (Between Layers) \\ $V=\frac{\rho(b^2-a^2)}{2\epsilon_0}$ (Inside Sphere)} \\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Plane of Charge (uniform density per unit area $\sigma$)&  $E = \frac{\sigma}{2\epsilon_0}$&$V = \frac{\sigma z}{2\epsilon_0}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Thin Cylindrical Shell (uniform density per unit arae $\sigma$) & \makecell{$E = \frac{R\sigma}{r\epsilon_0}$ (Outside Shell)\\$E = 0$ (Inside Shell)}& \makecell{$V = \frac{R\sigma}{\epsilon_0}\ln\left(\frac{R}{r}\right)$ (Outside Shell) \\ $V = 0$ (Inside Shell)}\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Solid Cylinder (charge density per unit volume $\rho$)& \makecell{$E = \frac{R^2\rho}{2 r\epsilon_0}$ (Outside Cylinder)\\$E = \frac{\rho r}{2 \epsilon_0}$ (Inside Cylinder)} & \makecell{$V=\frac{R^2\rho}{2\epsilon_0}\ln\left(\frac{R}{r}\right)$ (Outside Cylinder)\\ $V = -\frac{\rho (r^2-R^2)}{4 \epsilon_0}$ (Inside Cylinder)}\\[3pt]  \hline \noalign{\smallskip}
+	\end{tabular}
+\end{center}
+\begin{center}
+	\begin{tabular}{m{4cm} c c}
+	\hline \noalign{\smallskip}
+		\centering Uniform Thick Cylindrical Shell (inner radius $a$, outer radius $b$, uniform density $\rho$)& \makecell{$E = \frac{\rho (b^2-a^2)}{2r\epsilon_0}$ (Outside Shell) \\ $E = \frac{\rho (r^2-a^2)}{2r\epsilon_0}$ (Between Layers) \\ $E = 0$ (Inside Cylinder)} &\makecell{$V = \frac{\rho (b^2-a^2)}{2\epsilon_0}\ln\left(\frac{b}{r}\right)$ (Outside Shell) \\ $V = \frac{\rho a^2}{2\epsilon_0}\ln\left(\frac{b}{r}\right) -\frac{\rho (r^2-b^2)}{4\epsilon_0}$ (Between Layers) \\ $V = \frac{\rho a^2}{2\epsilon_0}\ln\left(\frac{b}{a}\right) -\frac{\rho (a^2-b^2)}{4\epsilon_0}$ (Inside Cylinder)}\\[3pt]  \hline \noalign{\smallskip}
+		\centering Uniform Thick Slab (width $w$, charge density per unit volume $\rho$, distance from center of slab $z$)& \makecell{$E = \frac{\rho w}{2 \epsilon_0}$ (Outside Slab) \\ $E = \frac{\rho z}{\epsilon_0}$ (Inside Slab)} & \makecell{$V = \frac{\rho w(w/2 - z)}{2 \epsilon_0}$ (Outside Slab) \\ $V = \frac{\rho (w^2/4 - z^2)}{2\epsilon_0}$ (Inside Slab)} \\[3pt]  \hline \hline \noalign{\smallskip}
+	\end{tabular}
+\end{center}
+\section*{Appendix E: Magnetic Fields}
+\addcontentsline{toc}{section}{Appendix E: Magnetic Fields}
+In each of the following setups, the magnitude of the current is $I$. In general, I will use the distance from a point to a line as $y$, the distance from a point to a plane as $z$, and the distance to an axis of symmetry as $r$. For the plane and slab of current, assume the current is all moving in the same direction. For the case of the toroid, imagine a current carrying wire wrapped around a hollow doughnut. 
+\begin{center}
+	\begin{tabular}{p{10cm} c}
+		\centering Description & Field \\ \hline \hline \noalign{\smallskip}
+		\centering Finite Current-Carrying Wire (length $L$) on perpendicular bisector& $B = \frac{\mu_0IL}{2\pi y\sqrt{L^2 + 4y^2}}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Outside an Infinite Uniform Wire of Radius $R$ & $B = \frac{\mu_0I}{2\pi r}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Inside an Infinite Uniform Wire of Radius $R$ & $B = \frac{\mu_0Ir}{2\pi R^2}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Infinite Current Sheet (current per unit length $\lambda$) & $B = \frac{\mu_0 \lambda}{2}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Outside Infinite Current Slab (current per unit area $\sigma$, width $w$) & $B = \frac{\mu_0\sigma w}{2}$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Inside Infinitely Long Solenoid (turns per unit length $n$) & $B = \mu_0nI$\\[3pt]  \hline \noalign{\smallskip}
+		\centering Inside Toroid (turns per unit length $n$) & $B = \mu_0 nI$\\[3pt]  \hline \noalign{\smallskip}
+		\centering On Axis of Circular Ring (radius $R$, distance $z$ to plane of loop) & $B = \frac{\mu_0 IR^2}{2(z^2+R^2)^{3/2}}$\\[3pt]  \hline \hline
+	\end{tabular}
+\end{center}

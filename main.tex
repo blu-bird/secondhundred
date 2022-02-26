@@ -1,0 +1,52 @@
+\documentclass[12pt, titlepage]{scrartcl}
+
+\usepackage{blubird}
+\usepackage[margin=1in]{geometry}
+%\usepackage[titletoc,toc,title]{appendix}
+%\renewcommand{\hat}{\mathbf}
+
+\usepackage{array}
+\usepackage{makecell}
+\newtheorem{law}{Law}
+\usepackage{float}
+\newtheorem{postulate}{Postulate}
+
+\title{Pages in Physics}
+\author{Bryan Lu, Rubaiya Emran}
+\date{Spring Break 2020}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\input{introduction.tex}
+
+\input{mechintro.tex}
+
+\input{electromagnetism.tex}
+
+\include{thermo}
+
+\input{waves.tex}
+
+\input{mechadv.tex}
+
+\input{relativity.tex}
+
+\input{quantum.tex}
+
+\include{epilogue}
+
+%% \include{appendices/keplerproof} fold into Gravitation
+
+%% \include{appendices/waveeqn} complete revamp -> EM or relativity section
+
+\include{appendices/unitsmeasurement}
+ 
+\include{appendices/constants}
+
+\include{appendices/momentsofinertia} 
+
+\include{appendices/commonebfields}
+\end{document}

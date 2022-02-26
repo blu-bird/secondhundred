@@ -1,0 +1,98 @@
+\section{Noether's Theorem and Hamiltonian Mechanics}
+One of the most important tools that we were able to use when solving problems before was with conserved quantities, such as linear momentum, angular momentum, and energy - but it's not really clear how they arise in Lagrangian mechanics. This section will serve to persuade you that not only do they arise naturally, but the manner in which they manifest themselves is on a much deeper level than we could have bargained for. 
+
+First, let's define a more general form of momentum - for a coordinate $q_i$, the \textit{generalized momentum} for that coordinate is the quantity $p_i = \pdv{\lagr}{\dot{q_i}}$. If we plug this into the Euler-Lagrange equation:
+\[
+	\dv{p_i}{t} = \pdv{\lagr}{q_j} + \sum_{k=1}^r \lambda_k \pdv{g_k}{q_j} + Q^{EXC}_j
+\]
+Notice that if the Lagrangian does not explicitly depend on the coordinate $q_i$, and if there are no contributions from the constraints and other forces, the equation reduces dramatically: 
+\[
+	\dv{}{t}p_i = \dot{p_i} = 0
+\]
+In this case, $p_i$ is a constant of motion. If the Lagrangian was to not be dependent on $q_i$, we say the Lagrangian is \textit{spatially homogeneous} with respect to $q_i$, and we call $q_i$ a \textit{cyclic coordinate}. As a simple example, we can look at the case of a free particle not under the influence of any potential in Cartesian coordinates:
+\[
+	\lagr = \frac{1}{2} m v^2 = \frac{1}{2} m ( \dot{x}^2 + \dot{y}^2 + \dot{z}^2 )
+\]
+If we apply Euler-Lagrange to $x$, for example: 
+\[
+	\dv{}{t}\pdv{\lagr}{\dot{x}} = \dv{}{t} (m \dot{x}) = \pdv{\lagr}{x} = 0 
+\]
+and a similar result holds for $y$ and $z$. Notice that in the absence of a potential, no external forces are acting on the object - therefore, in the absence of an external force, we have  $p_x = m \dot {x}$ to be a constant, which you might recognize as the linear momentum in the $x$-direction. In general, the entire vector $m \dot{\vec{r}}$ is a constant, so we get conservation of linear momentum for free! We can similarly get conservation of angular momentum if we apply the same idea to a freely rotating particle and use cylindrical/spherical coordinates. 
+
+This, in essence, is \textbf{Noether's Theorem}, which states that if the Lagrangian is independent of some coordinate, then there exists a conserved quantity corresponding to it. This implies that we can shift the coordinate (by a first-order term) however we want, and we'll still have the conserved quantity. Back to our free-particle example, this is like saying that no matter where you put your origin on the $x$-axis, the particle will still have its $x$-linear momentum conserved. 
+
+In general, if we can shift the values of the coordinates so that the Lagrangian is invariant (i.e. perform an \textit{invariant transformation}), we actually will still have a conserved quantity. The proof of this follows from some explicit mathematical computation. For any symmetry, by definition, the Lagrangian is constant, so we have $\dv{\lagr}{\epsilon} = 0$: 
+\begin{align*}
+	0 = \dv{\lagr}{\epsilon} &= \sum_i \left[\pdv{\lagr}{q_i} \dv{q_i}{\epsilon} + \pdv{\lagr}{\dot{q_i}} \dv{\dot{q_i}}{\epsilon} \right] \\
+	&= \sum_i \left[\dv{}{t} \left(\pdv{\lagr}{\dot{q_i}} \right)\xi_i + \pdv{\lagr}{\dot{q_i}}\dot{\xi_i}  \right] \\ 
+	&= \dv{}{t} \sum_i \left(\pdv{\lagr}{\dot{q_i}} \xi_i \right) = \dv{}{t} \sum_i p_i \xi_i = \dv{}{t}(\mathbf{p} \cdot \mathbf{\xi})
+\end{align*}
+where $\mathbf{p} = (p_1, p_2, \ldots, p_n)$ and a similar definition for $\mathbf{\xi}$ - both of which are vectors. This last expression, $\mathbf{p} \cdot \mathbf{\xi}$, is called the conserved momentum for this invariant transformation. 
+
+\subsection{The Hamiltonian and the Generalized Energy Theorem}
+How do we get to the idea of conservation of energy? The only coordinate that we haven't really talked about homogeneity with is the time coordinate $t$, and so it makes sense that energy is the conserved quantity associated with temporal invariance. However, time is special when discussing symmetries, because we can vary our coordinates, but we can't really discuss varying time. In order to investigate this, we start by considering the total time derivative of the Lagrangian: \footnote{Assume, for the sake of our results and for the rest of the handout, that we don't have any constraints lying about, and neither do we have weird, non-conservative, velocity-dependent forces, so we don't have the extra terms that come with Euler-Lagrange in the general case. It's laziness on my part and it saves some space. :)}
+\begin{align*}
+	\dv{\lagr}{t} &= \sum_i \left[\pdv{\lagr}{q_i}\dv{q_i}{t} + \pdv{\lagr}{\dot{q_i}}\dv{\dot{q_i}}{t} \right] + \pdv{\lagr}{t}  = \sum_i \left[\dv{}{t}\left(\pdv{\lagr}{\dot{q_i}}\right) \dot{q_i} + \pdv{\lagr}{\dot{q_i}}\dv{\dot{q_i}}{t} \right] + \pdv{\lagr}{t} = \dv{}{t} \sum_i \left[\dv{\lagr}{\dot{q_i}}\dot{q_i}\right] + \pdv{\lagr}{t} 
+\end{align*}
+We define \textit{Jacobi's Generalized Energy} as the function $h(\mathbf{q}, \mathbf{\dot{q}}, t) = \sum_i \dot{q_i}\pdv{\lagr}{\dot{q_i}} - \lagr$, and the \textit{Hamiltonian} as $\ham(\mathbf{q}, \mathbf{p}, t) = \sum_i p_i\dot{q_i} - \lagr$. These are literally the same function with different names, but the difference lies in what variables you take as your independent ones, or what variables you are allowed to vary as you please. The Hamiltonian does it with the generalized momenta, which will be very lucrative. 
+
+Once we do some manipulating, we get that 
+\[
+  -\pdv{\lagr}{t} = \dv{}{t} \left(\sum_i p_i\dot{q_i} - \lagr \right) = \dv{\ham}{t}
+\]
+Therefore, if the Lagrangian does not have explicit time dependence (so $\pdv{\lagr}{t} = 0$), and we also have nice conditions where we don't have any extra constraints and don't have any weird forces to deal with, we have the Hamiltonian $\ham$ as the associated conserved quantity. 
+
+Is the Hamiltonian always the total energy of the system? We'll generally treat it as the energy, but in general, the Hamiltonian is \textit{not necessarily} the energy of the system. The nuance here comes from if the coordinates have explicit time-dependence built into them, in which case the Hamiltonian can be computed to be not the total energy. This is also one of those cases that we'll ditch. 
+
+\subsection{The Legendre Transform}
+We'll discuss, as an aside, the useful relationship between variables and their functions that is the \textit{Legendre transform}. In general, consider a vector $\mathbf{u}$, some other vector $\mathbf{w}$, and a function $F(\mathbf{u}, \mathbf{w})$. Let the set of variables $\textbf{v}$ stored in a vector be the set of variables defined such that $v_j = \pdv{}{u_j} F(\mathbf{u}, \mathbf{w})$. The \textit{Legendre transform} of $F$ with respect to $u$ is the function $G(\textbf{v}, \textbf{w})$ such that $u_k = \pdv{}{v_k} G(\textbf{v}, \textbf{w})$. The Legendre transform $G$ is related to $F$ such that
+\[
+	G + F = \textbf{u} \cdot \textbf{v} \quad \pdv{F}{w_j} = - \pdv{G}{w_j}
+\]
+for all $w_j$ in $\textbf{w}$. $\textbf{u}$ and $\textbf{v}$ are said to be the \textit{active} variables, and $\textbf{w}$ is the set of \textit{passive} variables.
+
+This seems like a weird thing to study, but let's throwback to thermodynamics and see where this shows up as well! Consider the thermodynamics potentials $U, F, G, H$, with the state variables $p, V, T, S$. For example, $H$ is a function of $p$ and $S$, naturally. Suppose we let $p$ be one of the active variables, and note that $\pdvc{H}{p}{S} = V$, so $V$ is the other active variable. Now, consider $-U$, which is naturally a function of $S$ and $V$, which also satisfies $\pdvc{(-U)}{V}{S} = p$, so $-U$ is the Legendre transform of $H$. Notice now by one of the properties of the Legendre transform, we get a Maxwell relation of sorts where 
+\[
+	\pdvc{H}{S}{p} = T = -\pdvc{(-U)}{S}{V}.
+\]
+We can do the same thing with the other potentials and the other independent variables and get the other Maxwell relations, which also follows from Clairaut.  
+
+Notice that the Legendre transform is also present in the Lagrangian, where if we take the Legendre transform of the Lagrangian with respect to $\dot{q}$, we see that the corresponding active variable is $\pdv{\lagr}{\dot{q_j}} = p_j$. The Legendre transform of the Lagrangian is the function of $\textbf{p}, \textbf{q}$, and $t$ which looks a lot like (and is) the Hamiltonian $\ham$. As a result, we get the property $\lagr + \ham = \textbf{p} \cdot \mathbf{\dot{q}}$, which is a normal property of the Hamiltonian that we defined above. In addition, we get the rest of \textit{Hamilton's canonical equations of motion} from the Legendre transform: 
+\[
+	\pdv{\ham}{p_j} = \dot{q_j} \quad -\pdv{\ham}{q_j} = \pdv{\lagr}{q_j} = \dv{}{t} \pdv{\lagr}{\dot{q_j}} = \dot{p_j} \quad -\pdv{\lagr}{t} = \pdv{\ham}{t} = \dv{\ham}{t}
+\]
+The last of these is a slight tweak to the Generalized Energy Theorem, for which the cleanest form is true by our assumptions made. 
+
+\subsection{Poisson Brackets}
+The last thing we're going to discuss is a different bridge between classical and quantum mechanics. Define the \textit{Poisson bracket} of two functions $\comm{F}{G}_{qp}$ as
+\[
+	\comm{F}{G}_{qp} = \sum_i \left( \pdv{F}{q_i} \pdv{G}{p_i} - \pdv{F}{p_i} \pdv{G}{q_i} \right)
+\]
+The Poisson bracket has some nice properties and identities that can be proved:  
+\begin{itemize}
+\item $\comm{F}{F}_{qp} = 0$. 
+\item $\comm{F}{G}_{qp} = -\comm{G}{F}_{qp}$. 
+\item $\comm{F}{GH}_{qp} = G\comm{F}{H}_{qp} + \comm{F}{G}_{qp}H$, and similarly, $\comm{FG}{H}_{qp} = F\comm{G}{H}_{qp} + \comm{F}{H}_{qp}G$.
+\item $\comm{F}{\comm{G}{H}_{qp}}_{qp} + \comm{H}{\comm{F}{G}_{qp}}_{qp} + \comm{G}{\comm{H}{F}_{qp}}_{qp} = 0$.
+\end{itemize}
+For the canonical variables $q_i$, $p_i$, we have: 
+\[
+	\comm{q_i}{q_j} = 0 \quad \comm{p_i}{p_j} = 0 \quad \comm{q_i}{p_j} = \delta_{ij}
+\]
+where $\delta_{ij}$ is the Kronecker delta, which is $1$ if $i = j$ and 0 otherwise. 
+
+A couple reasons why the Poisson bracket is nice -- if we transform the canonical variables to a different set of canonical variables $\textbf{P}$ and $\mathbf{Q}$, Poisson brackets are nice because they are invariant on the choice of the canonical variables, i.e. choosing different $\mathbf{Q}$ and $\mathbf{P}$ still allow them to be evaluated the same way, as long as the transformation is bijective. 
+
+The last thing -- the Poisson bracket corresponds very closely to the commutator of quantum mechanics fame. It won't be done explicitly here, but if we consider $\comm{F_1F_2}{G_1G_2}_{qp}$, we can write it in two ways and obtain 
+\[
+	\comm{F_1}{G_1}_{qp}(F_2G_2-G_2F_2) = (F_1G_1-G_1F_1)\comm{F_2}{G_2}_{qp}
+\]
+which gives 
+\[
+	 \frac{\comm{F_1}{G_1}}{\comm{F_1}{G_1}_{qp}} = \frac{\comm{F_2}{G_2}}{\comm{F_2}{G_2}_{qp}}
+\]
+These have to be equal to some constant $\lambda$, since each side is independent. Here, $\comm{F_1}{G_1}$ means the usual commutator. This implies that $\comm{F}{G} = \lambda \comm{F}{G}_{qp}$, which gives a direct correspondence between the Poisson bracket of two functions and their commutator. If these happen to be some canonical variables $q_i, p_j$, we see that 
+\[
+	q_i p_j - p_j q_i = \lambda \delta_{ij}
+\]
+If we let $\lambda = i\hbar$, this allows us to bridge the gap between classical and quantum mechanics, as we now obtain the Heisenberg commutation relations. This small step, made first by Dirac, embeds the quantization straight into classical mechanics, which is one of the first steps to rigorizing the treatment of quantum mechanics. 

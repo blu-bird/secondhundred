@@ -1,0 +1,305 @@
+\section{Lorentz Transformations and Four-Vectors}
+\subsection{Lorentz Transformation}
+From the time dilation experiment, we can derive a transformation that can transform between different inertial frames of reference. Note that we can represent the coordinates of an object with a vector -- however, this vector must have \textit{four} components, time and the three spatial dimensions. After all, as indicated by our thought experiments, time and space are intimately connected, as moving through space corresponds to a slowing of time, and a shortening of observed lengths. In this analysis, we'll stick to one spatial and one temporal dimension, although the analysis holds for all spatial dimensions. We can define different events by their spacetime coordinates, i.e. the time they occur and the place they occur with respect to some origin. 
+
+When we derive the nature of the transformation that can transform between different inertial frames of reference, we assume that this transformation has to be \textit{linear}. What I mean here is that the transformation satisfies two basic properties: 
+\begin{enumerate} % fix?  
+    \item \textit{Additivity} -- we get the same result if we add two spacetime intervals and transform it into a different frame, or if we transform the two intervals first and then add them together. For example, if I walk 2m and then 3m in my frame, and Rubaiya is whizzing by me at % finish thought
+    \item \textit{Scalability} -- we get the same result if we take a transformed interval and scale it, or if we scale an interval first and then transform it. 
+\end{enumerate}
+
+With the property that the transformation is linear, we can declare that our transformation between frames can be modeled as a matrix $\Lambda$, acting on a vector of our coordinates: 
+\[
+    \begin{pmatrix} 
+    t_1 \\ x_1
+    \end{pmatrix} = \begin{pmatrix}
+    ? & ? \\ ? & ? 
+    \end{pmatrix}\begin{pmatrix} 
+    t_0 \\ x_0
+    \end{pmatrix}
+\]  
+Clearly, our matrix can only be a function of the velocity $v$ that we're trying to boost our second coordinates into, which helps somewhat\ldots Let's use our time dilation thought experiment --  in Sally's frame, the time the photon returns to her is $t_S = \frac{2h}{c}$, at position $x_S = 0$. In Joe's frame, the photon returns at time $t_J = \frac{2h}{c}\gamma = \gamma t_S$, in which the photon has moved to the right by $\gamma v t_S$ due to the train having moved in his frame in that time. This allows us to conclude the form of the entries in the left-hand column: 
+\[
+    \begin{pmatrix} 
+    t_J \\ x_J
+    \end{pmatrix} = \begin{pmatrix}
+    \gamma & a(v) \\ \gamma v & b(v) 
+    \end{pmatrix}\begin{pmatrix} 
+    t_S \\ x_S
+    \end{pmatrix}
+\]  
+In order to conclude the form of the other two entries, notice that simply flipping $v$ to $-v$ will the boost that will take Joe's frame in which Sally is moving at speed $v$ on the train to Sally's frame, in which she is stationary. This should also correspond to the matrix's inverse! Hence, we require that 
+\[
+\begin{pmatrix}
+    \gamma & a(v) \\ \gamma v & b(v) 
+    \end{pmatrix}\begin{pmatrix}
+    \gamma & a(-v) \\ -\gamma v & b(-v) 
+    \end{pmatrix} = \begin{pmatrix}
+    1 & 0 \\ 0 & 1 
+    \end{pmatrix}
+\]
+The equations useful for us will be 
+\[
+    \gamma^2 - \gamma v a(v) = 1 \quad \gamma a(-v) + a(v) b(-v) = 0 
+\]
+Solving the first: 
+\[
+    \gamma v a(v) = \frac{1}{1 - \frac{v^2}{c^2}} - 1 = \frac{v^2}{c^2(1 - v^2/c^2)} \implies a(v) = \frac{\gamma v}{c^2}
+\]
+Plutting into the second: 
+\[
+    -\frac{\gamma^2 v}{c^2} + \frac{\gamma v}{c^2} b(v) = 0 \implies b(v) = \gamma 
+\]  
+This gives us the transformation that takes a frame at rest into coordinates in which that frame is moving $v$ to the right, a \textbf{Lorentz Transformation}.
+Unfortunately, the dimensions of the matrix are sort of all over the place - we got speed and speed inverse, as well as dimensionless constants. To rectify this, we fold in the speed of light into the time component of our vectors, in order to make everything have the same dimension: 
+\[
+    \begin{pmatrix} 
+    t_1 \\ x_1
+    \end{pmatrix} = \begin{pmatrix}
+    \gamma & \frac{\gamma v}{c^2} \\ \gamma v & \gamma
+    \end{pmatrix}\begin{pmatrix} 
+    t_0 \\ x_0
+    \end{pmatrix} = \begin{pmatrix}
+    \gamma t_0 + \frac{\gamma v}{c^2}x_0 \\ \gamma v t_0 + \gamma x_0
+    \end{pmatrix} \implies \begin{pmatrix} 
+    ct_1 \\ x_1
+    \end{pmatrix} = \begin{pmatrix}
+    \gamma c t_0 + \frac{\gamma v}{c}x_0 \\ \frac{\gamma v}{c} \cdot t_0 + \gamma x_0 \end{pmatrix}= \begin{pmatrix}
+    \gamma & \frac{\gamma v}{c} \\ \frac{\gamma v}{c} & \gamma
+    \end{pmatrix}\begin{pmatrix} 
+    ct_0 \\ x_0
+    \end{pmatrix}
+\]
+We will use the following notation for the Lorentz Transformation $\Lambda (v)$:
+\[
+    \Lambda (v) = \begin{pmatrix}
+    \gamma & \frac{\gamma v}{c} \\ \frac{\gamma v}{c} & \gamma
+    \end{pmatrix}
+\]
+
+%%% discussion including all four dimensions
+
+In general, we consider \textbf{4-vectors}, denoted $x^\mu$, with four components denoted like so: 
+\[
+    x^\mu = \fourvec{ct}{x}{y}{z} = \fourvec{x^0}{x^1}{x^2}{x^3}
+\]
+where the superscripts aren't exponents, they're indices. The placement of the index is (for right now) not super relevant, but you'll also see the index placed downstairs as a subscript. $x^\mu$ can sort of refer to the vector as a whole, but also $\mu$ takes on values of $0, 1, 2, 3$ -- so specific values of $\mu$ reference specific components of the vector. This is sort of a confusing consequence of Einstein summation convention, but I hope it's not too hard to get used to. 
+
+Boosting into a frame backwards so that a frame originally at rest is now moving at velocity $v$ in the $x$-direction should not affect position in the $y$ and $z$ directions, so extending the Lorentz Transformation should naturally give
+\[
+\Lambda(v \hat i) = 
+\begin{pmatrix}
+    \gamma & \gamma \frac{v}{c} & 0 & 0 \\
+    \gamma \frac{v}{c} & \gamma & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 
+\end{pmatrix}
+\]
+
+We can similarly do this for the other two perpendicular directions: 
+%fill 
+\[ \Lambda(v\hat{j}) = 
+\begin{pmatrix}
+    \gamma & 0 & \gamma \frac{v}{c} & 0 \\
+    0 & 1 & 0 & 0 \\
+    \gamma \frac{v}{c} & 0 & \gamma & 0 \\
+    0 & 0 & 0 & 1
+\end{pmatrix}
+\]
+\[ \Lambda(v\hat{k}) = 
+\begin{pmatrix}
+    \gamma & 0 & 0 & \gamma\frac{v}{c} \\
+    0 & 1 & 0 & 0 \\
+    0 & 0  & 1 & 0 \\
+     \gamma \frac{v}{c} & 0 & 0 & \gamma
+\end{pmatrix}
+\]
+
+%% discussion of "hyperbolic" nature of lorentz transform
+\subsection*{The Velocity Parameter}
+We can treat the Lorentz transformation as a ``rotation'' of sorts -- just as regular 3D rotations rotate objects in space, Lorentz transformations can be seen to ``rotate'' through different inertial frames of reference. Let $\tanh \eta = \frac{v}{c}$, where $\eta$ can take on any real value. Notice that $\frac v c$ may take on any values between -1 and 1. We remind ourselves of the hyperbolic function identities: 
+\[
+    \cosh^2 \eta- \sinh^2 \eta = 1 \implies 1 - \tanh^2 \eta = \sech^2 \eta 
+\]
+Notice that with the definition given above, $1 - \tanh^2 \eta = 1 - \frac{v^2}{c^2}$, which looks close to $\gamma$! In particular, 
+\[
+    \gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}} = \cosh \eta 
+\]
+and so $\frac{\gamma v}{c} = \cosh \eta \tanh \eta = \sinh \eta$. That means the Lorentz transformations can be parameterized by the arbitrary real $\eta$ instead of $v$: 
+\[
+    \Lambda (\eta) = \begin{pmatrix}
+        \cosh \eta & \sinh \eta \\ \sinh \eta & \cosh \eta 
+    \end{pmatrix}
+\]
+This looks rather similar to the 2-D rotation matrix -- hence why sometimes people say the Lorentz transformations are hyperbolic rotations in spacetime. 
+
+%%% "addition of velocity"?
+\subsection*{Velocity Addition}
+Now let's study the problem of how to add parallel velocities in special relativity. Suppose that we have a rocket moving at speed $u$ relative to the lab frame. The rocket launches a torpedo at speed $w$ relative to the rocket. What is the speed of the torpedo in the lab frame?
+
+The time-position vector of the torpedo in the boat frame is 
+\[\begin{pmatrix}
+    ct \\ wt
+\end{pmatrix}. \] Applying the Lorentz transformation, we find that in the lab frame the vector is 
+\[
+\begin{pmatrix}
+    \gamma c t + \gamma \frac{u}{c } w t \\
+    \gamma u t + \gamma w t.
+\end{pmatrix}
+\]
+The speed can be found by dividing the position by the time:
+\[
+v = \frac{\gamma u + \gamma w}{\gamma + \gamma \frac{uw}{c^2}} = \frac{u+w}{1+\frac{uw}{c^2}}.
+\]
+This is the velocity addition formula. Note that, no matter how close $u$ and $w$ come to the speed of light, $v$ never exceeds $c$.
+%%% invariance of space-time interval under lorentz, e.g. proper time
+\subsection{Invariance of the Interval}
+For us, we will use the concept of \textbf{proper time}. The proper time of an observer is (rather circularly) the time that the observer measures. In our "Joe and Sally" example where Joe is at rest on the ground and Sally is on the train, Sally's proper time is the time $\tau$ that she measures, and let's take Joe's proper time as the actual coordinate time $t$. This means that 
+\[
+    \tau = \frac{t}{\gamma}
+\]
+We're letting $\gamma$ be a constant for now, but we can easily change that (as we may see later). Note this is also true for each infinitesimal timestep for each person, so we can easily just say 
+\[
+    d\tau = \frac{dt}{\gamma}
+\]
+Now, we can expand $\gamma$:
+\[
+    d\tau = \sqrt{1 - \frac{1}{c^2} \left(\dv{r}{t}\right)^2 }\,  dt
+\]
+If we clear the $c^2$ and move the $dt$ inside the square root, we end up with, after clearing the square root as well: 
+\[
+    c^2 d \tau^2 = c^2 dt^2 - dr^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2
+\]
+Note that in Sally's frame, $dx_\tau = dy_\tau = dz_\tau = 0$, as she remains stationary, so we could say that in both frames, 
+\[
+    c^2 d \tau^2 - dx_\tau^2 - dy_\tau^2 - dz_\tau^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2
+\] 
+so the quantity $ds^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2$ is invariant in every frame. This $ds^2$ is called the \textit{spacetime interval}. This is sort of like how the distance $dr^2 = dx^2 + dy^2 + dz^2$ is preserved under rotations, but for these Lorentz transformations. The proper time is sort of related to the spacetime interval in that for the frame in which the observer is at rest, the spacetime interval $ds^2 = c^2 d\tau^2$. This is nice because $d\tau$ is an invariant for the observer in the frame, and we'll be using the proper time to take derivatives within a certain frame of reference. 
+
+If we revisit the four-vector $x^\mu$, it might be natural to define the infinitesimal $dx^\mu$ as 
+\[
+    dx^\mu = \fourvec{c \, dt}{dx}{dy}{dz}
+\]
+Notice that the invariant spacetime interval can be sort of ``factored'' in a weird way, like a dot product: 
+\[
+    ds^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2 = \begin{pmatrix}
+        c\, dt & -dx & -dy & -dz
+    \end{pmatrix} \fourvec{c \, dt}{dx}{dy}{dz} 
+\]
+Okay, now to introduce some notation. The \textit{metric tensor} $g_{\mu \nu}$ is the ``matrix'' with entries like so: 
+\[
+    g_{\mu \nu} = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & -1 & 0 & 0 \\
+        0 & 0 & -1 & 0 \\
+        0 & 0 & 0 & -1 
+    \end{pmatrix}
+\]  
+The metric tensor lowers the indices on the vectors. That is, $g_{\mu \nu} v^{\nu} = v_{\mu}$. Note the use of summation notation here. The index $\nu$ is summed over. Lowering the indices puts a negative sign on the spatial components and keeps the time component the same.
+%% need to be like thought out/explained in a way that's more careful and shit
+The spacetime interval can thus be written as $ds^2 = g_{\mu \nu} dx^\mu dx^\nu$
+\subsection{Spacetime Diagrams and World Lines}
+One helpful tool for showing the motion of relativistic particles is the spacetime diagram. The spacetime diagram shows the $ct$-$x$ plane. An event, a point of fixed $x$ and $ct$, is shown by a point on the diagram. The path of a particle on the spacetime diagram is called its \textit{world line}. 
+
+The world line of light is always a 45-degree line in any spacetime diagram because the speed of light is constant in every frame. If we add another spatial dimension, light rays define a light cone. Only events within the light cone surrounding an event (a point on the spacetime diagram) can affect or be affected by that event.
+
+We can show transformations between different reference frames on spacetime diagrams.
+
+\subsection{Loss of Simultaneity} Suppose one observer is at the middle of a traincar of length $2L$ moving at speed $v$ in the $x$-direction. The other observer is standing stationary on the train platform. Let a flash of light be emitted at the center of the train just as the observers pass each other. Let the emission take place at the origin for both observers.
+
+According to the observer on the train, the events of the pulses hitting the sides of the train correspond to time-position vectors of 
+\[\begin{pmatrix}
+    L \\ L
+\end{pmatrix} \] and \[\begin{pmatrix}
+    L \\ -L
+\end{pmatrix}. \] These transform to 
+\[\begin{pmatrix}
+    L\gamma\left(1+\frac{v}{c}\right) \\ L\gamma\left(1+\frac{v}{c}\right)
+\end{pmatrix} \] and \[\begin{pmatrix}
+    L\gamma\left(1-\frac{v}{c}\right) \\ L\gamma\left(1+\frac{v}{c}\right)
+\end{pmatrix}. \] 
+The events are not simultaneous in the frame of the observer at rest. Intuitively, this is because the train is moving forward, so the light pulse hitting the back of the train should do so before the pulse hitting the front. This is, in fact, what the calculations show.
+
+\subsection{Relativistic Rocket Equation}
+We're going to discuss now accelerating reference frames, and we're going to travel the stars. 
+
+Let's discuss the rocket equation setup from a classical perspective, but we will imbue our analysis with a newfound appreciation of special relativity. We will assume for the moment that ordinary linear momentum is conserved, so that is a fact that we can still use. 
+
+Suppose I'm an ``stationary'' observer on Earth and my twin Alex is boarding a rocket ship. This rocket is propelling itself by chucking mass out the back. To be specific, Alex observes that the mass leaves the rocket relative to his rest frame at a speed $u$. The mass of the rocket at any given time is $m(t)$, and the rate at which the mass is leaving the rocket is $r = \dv{m}{\tau}$, relative to Alex. Note the use of the $\tau$ -- this is done in Alex's proper time, not in my coordinate time. 
+
+Let's pick an instantaneous rest frame of Alex's motion. At the beginning, the total linear momentum of the rocket in Alex's frame is $0$, as the rocket is at rest. Then, if we suppose the rocket's mass changes by a small amount $dm$, the new linear momentum $P_f^{(r)}$ in the rest frame is 
+\[
+    P_f^{(r)} = m dv^{(rest)} + u dm
+\]
+Note that $dm$ is assumed here to be negative. 
+
+However, this is $0$! So we obtain a separable differential equation in $m$: 
+\[
+    m dv^{(rest)} = - u dm \implies - \frac{dv^{(rest)}}{u} = \frac{dm}{m}
+\]  
+$dv^{(rest)}$ is taken to be the small infinitesimal gain in speed that the rocket gains, relative to this first rest frame! If $v$ is the speed I observe Alex to be traveling at in my frame, after this propulsion, I will be observing him to be traveling at (relative to myself)
+\[
+    \frac{v + dv^{(rest)}}{1 + \frac{vdv^{(rest)}}{c^2}}
+\]
+This is an unwieldy expression to work with, so we expand to first-order in $dv^{(rest)}$:
+\[
+    (v + dv^{(rest)}) \sum_{k=0}^\infty (-1)^k \frac{(vdv^{(rest)})^k}{c^2k} = v + dv^{(rest)} - \frac{v^2}{c^2} dv^{(rest)} = v + \frac{dv^{(rest)}}{\gamma^2}
+\]
+This latter term can be interpreted as the true infinitesimal change in speed in my frame, so $\gamma^2 dv = dv^{(rest)}$. Plugging this back into our separable equation: 
+\[
+    - \frac{\gamma^2 dv}{u} = \frac{dm}{m} \implies \frac{1}{u} \cdot \frac{dv}{1-\frac{v^2}{c^2}} = - \frac{dm}{m}
+\]
+We have to now remember how to integrate. How do we this integral on the left-hand side? Yes! Partial fractions...
+\[
+    \frac{1}{2u}\left(\frac{1}{1-\frac{v}{c}} - \frac{1}{1+\frac{v}{c}}\right)dv = - \frac{dm}{m}
+\]
+Now we integrate: 
+\[
+\frac{c}{2u} \left(-\ln\left(1-\frac{v}{c}\right) + \ln \left(1+\frac{v}{c} \right) \right)\Big|_{v_i}^{v_f} = - \ln m(t) \Big|_{m_0}^{m_f}
+\]
+For simplicity, let's suppose $v_i$ is 0 (so Alex is starting his journey from rest), which yields
+\[
+`   \ln \frac{m_0}{m_f} = \frac{c}{2u} \ln \left(\frac{1+\frac{v}{c}}{1-
+\frac{v}{c}} \right)
+\]
+Notice the similarity (but also the differences) between this and the Tsiolkovsky rocket equation you derived in AP:
+\[
+    v = u \ln \frac{m_0}{m_f}
+\]
+One sanity check: if $v << c$, our equation should reduce to Tsiolkovsky. Let's see if that's true. 
+\[
+\ln \frac{m_0}{m_f} = \frac{c}{2u} \ln \left(1 + \frac{\frac{2v}{c}}{1 - \frac{v}{c}} \right) = \frac{c}{2u} \ln \left(1 + \frac{2v}{c - v} \right) 
+\]
+ (Why didn't we have to do this analysis for the mass too? Mass is assumed to be invariant in all frames... some textbooks used to consider the mass of an object to fluctuate with a factor of $\gamma$ as it picked up speed, but we now lump that in with the velocity. More on that later.)
+\subsection{Momentum-Energy Four Vector}
+From the position four vector, we can define a new momentum four-vector. Since the proper time is an invariant, it makes sense to take derivatives with respect to proper time. 
+
+Since 
+\[dx^\mu = \begin{pmatrix}
+    cdt \\ dx \\ dy \\ dz
+\end{pmatrix}, \] we define 
+\[ p^\mu = m \frac{dx^\mu}{d\tau} = \begin{pmatrix}
+     mc \frac{dt}{d\tau} \\ m\frac{dx}{d\tau} \\
+    m\frac{dy}{d\tau} 
+    \\ 
+    m\frac{dz}{d\tau}
+\end{pmatrix} .\] 
+How does the momentum four-vector relate to the classical momentum? Recall that $t = \gamma \tau$, so \[ p^\mu =  \begin{pmatrix}
+    \gamma m c \\ \gamma \frac{dx}{dt} \\
+    \gamma \frac{dy}{dt} 
+    \\ 
+    \gamma \frac{dz}{dt}.
+\end{pmatrix} \] 
+
+The spatial components of the four-momentum are just $\gamma m \vec{v}$, which is $\gamma$ times the classical momentum. 
+
+The time component turns out to be the energy divided by $c$. This makes sense as it has the right units, and, if the other components of the four-vector are conserved, it must be conserved as well. 
+
+The kinetic energy can be calculated by the work energy theorem. The force is the time-derivative of the momentum: \[F = \frac{dp}{dt} = \frac{d(\gamma m v)}{dt} = \gamma^3 m a. \] The kinetic energy is then 
+\begin{align*}
+    K &= \int\limits_{0}^{v}  \gamma^3 ma dx, \\
+    &= \int\limits_{0}^{v}  \gamma^3 mv dv, \\ &= 
+    \int\limits_{0}^{v}   \frac{mv}{\left(1-\frac{v^2}{c^2} \right)^{3/2}} dv, \\
+    &= \gamma m c^2 - mc^2.  
+\end{align*}
+The integral is straightforward to compute using a $u$-substitution. Therefore the energy is \[E = \gamma m c^2 = K + mc^2. \] The term $mc^2$ is the rest energy.

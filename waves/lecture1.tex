@@ -1,0 +1,130 @@
+\section{General Waves and the Wave Equation}
+
+\subsection{The Wave Equation}
+Consider the following nice happy wave - I've currently drawn it as a sinusoidal wave, but it really doesn't actually matter what shape it takes as long as it's continuous and satisfies a few of our assumptions (that we will list later):
+\begin{center}
+\begin{asy}
+	import graph;
+	size(200);
+	real shift = 0.2;
+	real down = -0.2;
+	real f(real x) 
+	{ 
+		return sin(x); 
+	} 
+	Label f; 
+	f.p=fontsize(6); 
+	draw(graph(f,-2,3));
+	for (int i = -2; i < 5; ++i)
+	{
+		draw( Circle( (i*0.5, f(i*0.5)), 0.1) );
+
+		//label((string) (i+3), (i*0.5, f(i*0.5)), N*4);
+	}
+	label("$i$", (0.5, f(0.5)), dir(135)*4);
+	label("$i-1$", (0, 0), dir(150)*4);
+	label("$i+1$", (1, f(1)), N*4);
+	draw((0.5+shift, f(0.5))--(0.5+shift,0), Arrows);
+	label("$\Delta y$", (0.5+shift, f(0.5))--(0.5+shift,0), E); 
+	draw((0, down)--(0.5, down), Arrows);
+	label("$\Delta x$", (0, down)--(0.5, down), S);
+\end{asy}
+\end{center}
+What I've done here is that I've essentially divided up the wave into discrete particles, as is the case in physics whenever we derive something continuous (we start with distinct pieces, and try to argue what happens when we make those pieces really really small). This wave is physically speaking, moving in an elastic string - and we assume that it has a constant tension $T$ and mass density per unit length $\mu$. We're also going to assume that all these little pieces of the wave only move up and down, and not horizontally - effectively, this is a wave in one dimension. We also take $\pdv{y}{x} << 1$ - this means we're dealing with what's called a linear wave, and it's a decent approximation for reality. Finally, we will neglect the effects of gravity on the string during this derivation. \\
+Let's get started. First, we're going to pick any of these discrete masses at random, say $i$. (I've numbered them arbitrarily in the diagram.) We're going to use Newton's Second Law on $i$, and so here's our free body diagram on point mass $i$:
+\begin{center}
+\begin{asy}
+size(100);
+dot((0,0)); 
+draw((0,0)--dir(30), Arrow); 
+draw((0,0)--dir(225), Arrow); 
+label("$\vec{F_1}$", (0,0)--dir(30));
+label("$\vec{F_2}$", (0,0)--dir(225));
+\end{asy}
+\end{center}
+These forces come from the tension in the string exerted in the directions of point masses $i-1$ and $i+1$. Notice that while both forces $\vec F_1,\vec F_2$ have the same magnitude by our assumption (they both have the magnitude of the tension, $T$), they point in different directions. Let's define $y_i$ to be the height of the $i$th particle. Assuming that the horizontal motion is negligible, we have by Newton's Second Law:
+$$F_{y1} = T \sin \theta_1 = T \cdot \frac{y_{i+1}-y_i}{\sqrt{\Delta x^2 + (y_{i+1} - y_i)^2}} $$
+$$F_{y2} = -T \sin \theta_2 = -T \cdot \frac{y_{i}-y_{i-1}}{\sqrt{\Delta x^2 + (y_{i} - y_{i-1})^2}} $$
+$$\rightarrow F_{net} = \mu \Delta x \frac{\partial^2 y_i}{\partial t^2} =  T \left(\frac{y_{i+1}-y_i}{\sqrt{\Delta x^2 + (y_{i+1} - y_i)^2}} -  \frac{y_{i}-y_{i-1}}{\sqrt{\Delta x^2 + (y_{i} - y_{i-1})^2}} \right)$$
+All we did here was project these forces into the vertical direction, and from the diagram, we more or less approximated the angle of the force to be essentially in the direction from one point to its neighboring point, hence all the Pythagorean Theorem-esque square roots.\\
+With our linear wave approximation, we have that $\Delta y << \Delta x$, and therefore we can ignore all second-order terms involving differences in $y$. That allows us to simplify down quite a bit:
+$$ T \left(\frac{y_{i+1}-y_i}{\Delta x} -  \frac{y_{i}-y_{i-1}}{\Delta x} \right) = \mu \Delta x \frac{\partial^2 y_i}{\partial t^2} $$ Here comes the part where we shift from discrete particles to continuous pieces. If we let $\Delta x$ go to zero, these individual fractions basically become first derivatives of $y$ with respect to $x$. However, since we're subtracting them, and they're almost the same (differing only by a small amount), their difference is effectively the derivative of the first derivative with respect to $x$, times $\Delta x$. In other words, we have:
+$$T \pddv{y_i}{x} \Delta x = \mu \Delta x \pddv{y_i}{t} $$Simplifying:
+$$T \pddv{y_i}{x} = \mu \pddv{y_i}{t} $$This is all true for a mechanical wave, but often times we want to relate this to the speed $v$ of the wave through the medium, in which case you'll see this as
+$$ \pddv{y}{x} = \frac{1}{v^2} \pddv{y}{t}$$
+Notice that $T = \mu v^2$. This relation will be very useful going forward.\\
+What solutions satisfy the equation? It turns out that a wide family of functions do - specifically, any function moving to the right at speed $v$ will satisfy the wave equation, and by symmetry, so will any function moving to the left. To be explicit, any function of the form $y(x, t) = f(x \pm vt)$ will satisfy the wave equation. We can check this explicitly: letting $y(x,t) = f(x \pm vt)$, we have:
+$$ \pddv{y}{x} = f''(x\pm vt) \quad \pddv{y}{t} = v^2 f''(x\pm vt)$$
+$$ \rightarrow \pddv{y}{x} = f''(x\pm vt) = \frac{1}{v^2} \pddv{y}{t} = \frac{1}{v^2} \cdot v^2 f''(x\pm -vt)$$
+
+\subsection{Energy in a Wave}
+Let's now derive an expression for the energy stored in the wave. Energy stored in a mechanical wave comes in two forms - kinetic energy and potential energy, so we will calculate these parts separately. 
+\begin{center}
+\begin{asy}
+	import graph;
+	size(200);
+	real shift = 0.2;
+	real down = -0.2;
+	real f(real x) 
+	{ 
+		return sin(x); 
+	} 
+	Label f; 
+	f.p=fontsize(6); 
+	draw(graph(f,-2,3));
+	for (int i = -2; i < 5; ++i)
+	{
+		draw( Circle( (i*0.5, f(i*0.5)), 0.1) );
+
+		//label((string) (i+3), (i*0.5, f(i*0.5)), N*4);
+	}
+	dot((0.75, f(0.75))); 
+	draw((0.75, f(0.75))--dir(35)+(0.75, f(0.75)), Arrow); 
+	draw((0.75, f(0.75))--dir(214)+(0.75, f(0.75)), Arrow); 
+	label("$i$", (0.5, f(0.5)), dir(135)*4);
+	label("$i+1$", (1, f(1)), N*4);
+\end{asy}
+\end{center}
+Revisiting our diagram above, we can consider the energy of a particle $i$ in the string. The kinetic energy is fairly straightforward - we note that the particle has mass $\mu \Delta x$ and velocity $\pdv{y_i}{t}$, so in general the kinetic energy of the particle $K = \frac{1}{2} \mu \Delta x \left( \pdv{y}{t} \right)^2$. \\
+What of the potential energy? We can consider the work that the forces do on the "link" between particles $i$ and $i+1$ in a time $\Delta t$, and in fact we know that the potential energy in this wave is stored in the interactions between parts of the string. From the previous section, we know that these forces have the same magnitude in the $y$-direction, $T \cdot \frac{y_{i+1} - y_i}{\Delta x}$. However, the distance (vertically) traveled in a time $\Delta t$ is different for each particle, so this difference gives us a net work:
+$$ W_{net} = -T \cdot  \frac{y_{i+1} - y_i}{\Delta x} \cdot \pdv{y_{i+1}}{t} \Delta t + T \cdot \frac{y_{i+1} - y_i}{\Delta x} \cdot \pdv{y_i}{t} \Delta t$$
+As we let $\Delta x$ go to zero, we can consider that $\frac{y_{i+1} - y_i}{\Delta x} = \pdv{y}{x}$. Simplifying, we have that in general 
+\begin{align*}
+W_{net} &= -T \Delta t \cdot \pdv{y}{x} \cdot \left(\pdv{y_{i+1}}{t} - \pdv{y_i}{t} \right) \\
+&= -T \Delta t \cdot \pdv{y}{x} \cdot \pdv{}{t}\left(\pdv{y}{x} \Delta x\right) \\
+&= -\Delta \left( \frac{1}{2} T \left( \pdv{y}{x} \right)^2 \right)  \Delta x
+\end{align*}
+where the $\Delta$ signifies a small change in the quantity, otherwise known as a differential\footnote{This is a bit of an abuse of notation, but Osborne used this notation during the lecture for the ease of motivating the next step.}. 
+We can now apply the Work-Energy Theorem to note that 
+$$ \Delta U = - W_{net} = \Delta \left( \frac{1}{2} T \left( \pdv{y}{x} \right)^2 \right)  \Delta x \rightarrow U =  \frac{1}{2} T \left( \pdv{y}{x} \right)^2 \Delta x$$
+With this explicit computation of the kinetic and potential energies, we can now state that the total energy of the particle is 
+$$ E = K + U = \left[\frac{1}{2} \mu \left( \pdv{y}{t} \right)^2 + \frac{1}{2} T \left( \pdv{y}{x} \right)^2 \right] \Delta x $$
+It's actually more convenient to find the energy per unit length $\epsilon$, since we don't have that pesky $\Delta x$ term:
+$$ \epsilon = \frac{1}{2} \mu \left( \pdv{y}{t} \right)^2 + \frac{1}{2} T \left( \pdv{y}{x} \right)^2 $$
+The total energy over a length of the wave, then, the energy is clearly the integral of this with respect to $x$:
+$$ E = \int_{x_1}^{x_2} \frac{1}{2} \mu \left( \pdv{y}{t} \right)^2 + \frac{1}{2} T \left( \pdv{y}{x} \right)^2 \, dx$$
+Power per unit length $p$ (energy delivered per unit length per unit time) can be attained by taking the derivative of the energy density: 
+\begin{align*}
+p &= \pdv{}{t} \left[\frac{1}{2} \mu \left( \pdv{y}{t} \right)^2 + \frac{1}{2} T \left( \pdv{y}{x} \right)^2  \right] \\
+&= \mu \pdv{y}{t} \pddv{y}{t} + T \pdv{y}{x} \frac{\partial^2 y}{\partial x \, \partial t}  \\
+&= T \left[\pdv{y}{t} \pddv{y}{x} + \pdv{y}{x} \frac{\partial^2 y}{\partial x \, \partial t} \right] \\
+&= T \pdv{}{x} \left[\pdv{y}{x} \pdv{y}{t} \right] 
+\end{align*}
+where we use the wave equation to replace $\pddv{y}{t}$ with $v^2 \pddv{y}{x}$ and observe we that can use the reverse of the product rule to simplify. From this, power in the wave can be obtained from this expression by integrating the power density with respect to $x$, or by differentiating energy with respect to $t$.\\
+From this point forward, we will assume the function is also all moving in one direction, so $y(x, t) = f(x \pm vt)$ (ie. the wave is either only moving to the right or to the left at speed $v$). Power can be attained by considering that if the wave moves in one direction through a boundary, the energy delivered to that boundary is the energy density times $v \Delta t$, where $\Delta t$ is the time interval. Therefore, we can simply multiply energy density by the speed of the wave to attain the power: 
+$$P = \left[\frac{1}{2} \mu \left( \pdv{y}{t} \right)^2 + \frac{1}{2} T \left( \pdv{y}{x} \right)^2 \right] v $$
+If the entirety of the wave is moving in one direction, we can exploit the fact that $\left( \pdv{y}{x} \right) = \frac{1}{v^2} \left( \pdv{y}{t} \right)$, to attain that the energy density is: 
+\[
+	\epsilon = T [f'(x \pm vt)]^2
+\]
+and the expression for energy in a length of the wave can be simplified slightly to the integral of this expression. 
+
+\subsection{Energy in Two Waves and Interference} 
+Consider now a function representing a composition of two waves moving in opposite directions, of the form $y(x, t) = f(x-vt) + g(x+vt)$. Notice that when we can calculate the energy per unit length and the power per unit length, as follows: 
+\begin{align*}
+	\epsilon &= \frac{1}{2} \mu v^2 (-f' + g')^2 + \frac{1}{2} T (f' + g')^2 \\
+	&= T (f'^2 + g'^2)\\
+	p &= T \pdv{}{x} \left[(f' + g') (-v f' + v g') \right] \\
+	&= Tv \pdv{}{x} (g'^2 - f'^2)
+\end{align*}
+These expressions have no cross-term; that is, the energies of these functions are not dependent on a term consisting of both functions related to $f$ and $g$ and therefore one can separate the energies into two distinct components - one of the energy from $f(x-vt)$ and the other from $g(x+vt)$. While these waves will interfere with each other, it's important to note that these waves are independent and propagate through each other and don't actually combine with each other. 

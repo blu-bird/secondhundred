@@ -1,0 +1,35 @@
+if(!settings.multipleView) settings.batchView=false;
+settings.tex="pdflatex";
+settings.inlinetex=true;
+deletepreamble();
+defaultfilename="main-1";
+if(settings.render < 0) settings.render=4;
+settings.outformat="";
+settings.inlineimage=true;
+settings.embed=true;
+settings.toolbar=false;
+viewportmargin=(2,2);
+
+import olympiad;
+pair O, P, X;
+size(8cm);
+O = (0,0);
+dot(O);
+draw(arc(O, 1, 0, 180));
+real dtheta = 8;
+real angle = 40;
+X = dir(angle);
+P = dir(angle+dtheta);
+draw(O--P, linetype("8 8"));
+draw(O--X, linetype("8 8"));
+real vertoffset = -0.1;
+draw((0, vertoffset)--(-1, vertoffset), linetype("8 8"), arrow=Arrows());
+draw(dir(180)--dir(0), linetype("4 4"));
+draw(arc(O, 0.8, angle, angle+dtheta), arrow=Arrows());
+dot(2*dir(90)/pi);
+
+label("$\theta$", 0.15*dir(angle/2), dir(angle/2));
+label("$ds$", dir(angle+dtheta/2), dir(angle+dtheta/2));
+label("$R$", (-0.5, 1.2*vertoffset), dir(270));
+label("$d\theta$", 0.7*dir(angle-dtheta), dir(angle-dtheta));
+label("COM", 2*dir(90)/pi, NW);

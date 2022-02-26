@@ -1,0 +1,41 @@
+\section{The Theory Breaks}
+\subsection{Introduction}
+In 1905, four papers by Albert Einstein were published, one of which proposed sweeping changes to the theory of mechanics as it was grounded in Newton's work. This paper would grow to become the foundation for the \textit{special} theory of relativity that we know today. 
+
+The motivation for this drastic change was rather pressing -- formulated in the latter half of the nineteenth century, Maxwell's equations in a vacuum predicted that waves of light propagate at a speed $c = 299792458$ m/s. The issue was that this was true \textit{no matter what inertial frame of reference an observer was in}, which seemed absurd at the time. To avoid this, physicists proposed the existence of an ``aether'', a medium associated with light propagation. In this way, light would propagate at a speed $c$ with respect to the aether, which avoided the issue. However, experiments to detect aether came up empty-handed, most notably the \textit{Michelson-Morley} experiment in 1901 that verified that the speed of light propagated at the same speed regardless of the direction of propagation, a major blow to the aether theory.
+
+A more logical conclusion, then, was to accept the following two statements to begin building a new theory:
+\begin{enumerate}
+    \item The speed of light is the same for all observers.
+    \item The laws of physics are invariant in all inertial frames of reference. 
+\end{enumerate}
+
+With this, and the other standard mechanical assumptions, we begin. 
+
+\subsection{Thought Experiments}
+In each of the scenarios below, we keep track of the time and position of each event. 
+
+\subsection*{Time Dilation}
+Because the speed of light in vacuum is constant in every frame, we can construct a clock that measures time by having light traverse a certain distance. Suppose we have such a clock on a train moving at speed $v$ in the positive $x$-direction. Sally, who is on the train, and Joe, who is a stationary observer, measure time by observing the time it takes an upward beam of light to hit the ceiling of the train and travel back down and hit the floor. Let the height of the train be $h$.
+
+From Sally's point of view, the light travels straight upward and then straight back down, traversing a total distance of $2h$. The time Sally measures is then \begin{equation}t_S = \frac{2h}{c}.\label{eq:ts} \end{equation}
+
+Joe, on the other hand, sees the light take an angled path due to the horizontal motion of the train. The light's total speed is $c$, and the component of the speed in the $x$-direction is $v$, so the speed in the $y$-direction is $\sqrt{c^2-v^2}$. Then the time measured by Joe is \begin{equation} t_J = \frac{2h}{\sqrt{c^2-v^2}} = \gamma t_S, \label{eq:tj}\end{equation} where \begin{equation}\gamma \equiv \frac{1}{\sqrt{1-v^2/c^2}}.\label{eq:gamma} \end{equation}  
+
+The time seen by Joe is dilated by a factor of $\gamma$.
+
+\subsection*{Length Contraction}
+Now consider a light beam traveling horizontally from the front of the train to the back and then returning to the front. Suppose the length of the train is $L_S$ in Sally's frame. According to Sally, the time it takes for the light to traverse this path is \begin{equation}t_S = \frac{2 L_S}{c}. \label{eq:tslc}\end{equation}
+
+In Joe's reference frame, the sides of the train are traveling in the positive $x$-direction with speed $v$. On the path from the front to the back of the train, the back of the train is moving toward the beam of light at speed $v$, so the time it takes to reach the back is \begin{equation*}\frac{L_J}{c+v}, \end{equation*} where $L_J$ is the length of the train in Joe's frame. On the second leg of the light's path, the front of the train is moving away at speed $c$, so the time on this leg is \begin{equation*} \frac{L_J}{c-v}.\end{equation*} The total time according to Joe is then 
+\begin{equation}
+    t_J = \frac{L_J}{c-v} + \frac{L_J}{c+v} = \frac{2cL_J}{c^2-v^2}
+    \label{eq:tjlc}
+\end{equation}
+From the previous thought experiment, we have $t_J = \gamma t_S$. This gives us
+\begin{align}
+    \frac{2cL_J}{c^2-v^2} &= \gamma \frac{2 L_S}{c}, \nonumber\\
+    L_J &=  \frac{(c^2-v^2)}{\sqrt{1-v^2/c^2}} \frac{2 L_S}{c^2},\nonumber\\
+    L_J &=  \sqrt{1-\frac{v^2}{c^2}} L_S,\nonumber\\
+    L_J &= \frac{L_S}{\gamma}. 
+\end{align}

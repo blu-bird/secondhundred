@@ -1,0 +1,53 @@
+\section*{Appendix B: The Wave Equation}
+\addcontentsline{toc}{section}{Appendix B: The Wave Equation}
+Warning: This section is very math-heavy. I did not include it in the main text because we're going to be using some multivariable calculus, which is well beyond the scope of AP Physics C. However, if you're interested in seeing why the expression for the speed of light $c$ in terms of $\epsilon_0$ and $\mu_0$ is true, and have enough of the math background to understand what's going on, read ahead. \\
+First of all, let's describe what a wave actually is. One possible way to describe it is as a function that repeats itself (that is, it's periodic), moving along at a constant speed $v$. Let's just look at a wave in one dimension (the $x$-direction), and let $f(x)$ be a wave (which might potentially have many variables). Then, there exists some time $t$ where $f(x) = f(x - vt)$ and exploiting this periodicity, $f(x) = f(x + vt)$ - or in other words, $f(x) = f(x \pm vt)$. If we let $u = x \pm vt$, $\pdv{u}{t} = \pm v$, so $\partial u = \pm v \, \partial t$. Similarly, we have that $\pdv{u}{x} = 1$, so $\partial u = \partial x$. These equations are attained by taking partial derivatives with respect to $x$ and $t$ in the relation $u = x \pm vt$. As a reminder, when we take a partial derivative with respect to some variable $x$, we hold all other variables constant except for $x$, take the derivative normally, except to denote that we're doing this we use a weird squiggly d, $\partial$. \\
+Let's consider what happens when we take the second partial derivative of $f$ with respect to $u$. Then we can actually plug in our equations relating $\partial u$ to $\partial x$ and $\partial t$:
+\[
+	\pdv{}{u}\left(\pdv{f}{u}\right) = \pdv{}{x}\left(\pdv{f}{x}\right) = \pddv{f}{x}
+\]
+\[
+	\pdv{}{u}\left(\pdv{f}{u}\right) = \pm\frac{1}{v}\pdv{}{t}\left(\pm\frac{1}{v}\pdv{f}{t}\right) = \frac{1}{v^2} \pddv{f}{t}
+\]
+Therefore we have:
+\[
+	\pddv{f}{x} = \frac{1}{v^2} \pddv{f}{t}
+\]
+This is the wave equation in one dimension, and it holds true for all functions that describe periodic wave functions.\\
+Now what does this have to do with Maxwell's equations? It turns out that we can rearrange his equations to show that electric and magnetic fields can behave like waves that induce each other. We're going to use the differential form of Maxwell's Equations, which use the curl and divergence operators. (Intuitively speaking, the divergence operator tells you how much a vector field is flowing outward from a point, and the curl operator tells you how much a vector field is circulating around a point.) These can be derived by applying Stokes' Theorem and the Divergence Theorem on the integral form of the equations, which I'll list here. In order, they are Gauss' Laws for Electric and Magnetic Fields, respectively, Faraday-Lenz's Law, and Ampere-Maxwell: 
+\[
+	\div \vec E = \frac{\rho}{\epsilon_0} \quad \div \vec B = 0 \quad \curl \vec E = -\pdv{\vec B}{t} \quad \curl \vec B = \mu_0 \left(\vec j + \epsilon_0 \pdv{\vec E}{t}\right)
+\]
+For simplicity, let's assume that we're working in free space, with no charges or currents, meaning $\rho$ and $\vec j$ are zero. This reduces our equations to:
+\[
+	\div \vec E = 0 \quad \div \vec B = 0 \quad \curl \vec E = -\pdv{\vec B}{t} \quad \curl \vec B = \mu_0\epsilon_0 \pdv{\vec E}{t}
+\]
+People who know multivariable calculus might know the curl of the curl identity for a vector field: in general, $\curl (\curl \vec F) = \grad(\div \vec F) - \laplacian \vec F$, where the symbol $\laplacian$ denotes the Laplacian operator (also equal to the divergence of the gradient operator). Let's take the curl of the left-hand side of Faraday's Law, using this identity:
+\[
+	\curl (\curl \vec E) = \grad(\div \vec E) - \laplacian \vec E = \grad (0) - \laplacian \vec E = -\laplacian \vec E
+\]
+where we substitute $\div \vec E$ for $0$, by Gauss' Law. If we do the same thing for the right-hand side of Faraday's Law and substituting in Ampere-Maxwell where it appears, we get:
+\[
+	\curl (\curl \vec E) = \curl \left(-\pdv{\vec B}{t}\right) = -\pdv{}{t} (\curl \vec B) = -\pdv{}{t} \left(\mu_0\epsilon_0 \pdv{\vec E}{t} \right) = -\mu_0 \epsilon_0 \pddv{\vec E}{t}
+\]
+Therefore, we have:
+\[
+	\laplacian \vec E = \mu_0 \epsilon_0 \pddv{\vec E}{t}
+\]
+If we project into the components of any unit vector (say it's the $\hat x$-direction) then by definition of the Laplacian as the divergence of the gradient we have that:
+\[
+	\pddv{E_x}{x} = \mu_0 \epsilon_0 \pddv{E_x}{t}
+\]
+But this is the wave equation, except we have that $v = \frac{1}{\sqrt{\mu_0 \epsilon_0}}$. If we do the same thing by taking the curl of Ampere-Maxwell: 
+\begin{align*}
+	\curl (\curl \vec B) &= \grad(\div \vec B) - \laplacian \vec B = \grad (0) - \laplacian \vec B = -\laplacian \vec B \\
+	\curl (\curl \vec B) &= \curl (\mu_0 \epsilon_0 \pdv{\vec E}{t}) \\
+	&= \mu_0 \epsilon_0 \pdv{}{t} (\curl \vec E) \\
+	&= \mu_0 \epsilon_0 \pdv{}{t} \left(-\pdv{\vec B}{t}\right)\\
+	&= -\mu_0 \epsilon_0 \pddv{\vec B}{t}
+\end{align*}
+By the same reasoning, we have:
+\[
+	\laplacian \vec B = \mu_0 \epsilon_0 \pddv{\vec B}{t} \rightarrow \pddv{B_z}{z} = \mu_0 \epsilon_0 \pddv{B_z}{t}
+\]
+This means that both the magnetic and electric fields in free space can form waves that propagate along at $v = \frac{1}{\sqrt{\mu_0 \epsilon_0}}$. These fields move at the same speed so electromagnetic waves of these fields can exist and move in space together. Thus, Maxwell's equations (with a bit of multivariable calculus) imply the existence of electromagnetic waves, which by measurement (and lots of evidence) also move along at the speed of light $c$. 

@@ -1,0 +1,114 @@
+\section{Lagrangian Mechanics}
+This is out first real look at Lagrangian mechanics, where we will start from Newton's Second Law and things we already know and derive an expression that may look familiar to one acquainted with some variational calculus. The new framework we will develop will force us to adopt a differing, but equivalent perspective on how nature works and change how we see mechanics.
+
+%\subsection{Motivating the Lagrangian} %clarity in this section is INFALLIBLY IMPORTANT
+
+%alternative interpretion of nature to minimize a quantity (a FUNCTIONAL) called the action that depends on the path (potentials) and motion (kinetic) of a particle => allowing us to use the Euler-Lagrange eqns. Then, from d'Alembert's principle and also wanting to get rid of vector quantities (and remove our grievances with Newtonian), showing that K-V is a good choice that satisfies the Euler-Lagrange eqns. 
+
+Before we move into the Lagrangian system, we'd like to hear some complaints about the Newtonian system, and what we might want to see in our new and improved system: 
+\begin{enumerate}
+\item \textbf{Too many equations of motion.} For any body, we have $6$ equations of motion per body that succinctly show the acceleration of that object. That's fine, but these equations of motion are often coupled second-order differential equations if things get messy and with more and more objects. Thermodynamics offers an alternative solution to this problem in the case of many, many particles if all we are concerned with is energy, but we would like to be able to actually \textit{look at} how all these objects move. 
+
+\item \textbf{Vectors are hard to deal with in general coordinate systems.} They work best if we stick to exclusively one coordinate system (maybe Cartesian), but moving vectors between representations in polar/cylindrical/spherical/rectangular/whatever other coordinates we might find useful is a pain and can be very messy. Scalar quantities, such as energy, do not suffer from this barrier - so we might be motivated to look at scalar quantities such as energy to help us out...
+
+\item \textbf{Finding and accounting for forces, including fictional forces and constraint forces.} It's paramount to account for all possible forces on a system when applying Newton's Second Law. However, depending on your choice of reference frame, we may have to include fictional forces to account for motion that appears to come from nowhere at all. Furthermore, from Newton's Third Law, interactions between objects have contact forces that may behave in ways that can be very complicated and influence the motion of objects in weird ways. In general, while forces are a useful tool for visualizing the interactions between objects in a system intuitively, the motion of the objects can be lost if we do not do this correctly.
+\end{enumerate}
+
+With this in mind, and the fact that we have some new mathematics under our belts, let us work from a slight modification of what we know already about mechanics, ie. Newton's Second Law, and slowly develop the Lagrangian method.
+
+Before physicists developed a suitable theory for dynamical systems, Bernoulli had already given statics a variational perspective. Consider a system of $N$ particles in equilibrium, so the total force on each particle $i$ is $0$, where $i$ can be an index from $1$ to $N$. Let the net force on particle $i$ be $\vec F_i$. One of the sneaky ideas we can use is to give each force a virtual displacement $\delta\vec r_i$ on each particle, that is, we allow the particles to shift by a slight, infinitesimal amount, without evolving the system in time. The quantity $\vec F_i \cdot \delta \vec r_i$ is called, appropriately, the \textit{virtual work.} Because the system is in equilibrium, the total virtual work must obviously be 0. From a Newtonian perspective, by summing over all the particles, then, we can write 
+\[
+	\sum_i^N \vec F_i \cdot \delta \vec r_i = 0. 
+\]
+We can decompose these forces into applied forces on these particles, $\vec F_i^A$, and constraint forces, $\vec F_i^C$. These sets of forces can be chosen in a way that is convenient to us, and we can separate them - 
+\[
+	\sum_i^N \vec F_i^A \cdot \delta \vec r_i + \sum_i^N \vec F_i^C \cdot \delta \vec r_i = 0.
+\]
+The second sum can be ignored if no virtual work is done by the constraint forces. This is true if the virtual displacements are tangent to a surface that the particle moves along, and the constraint force are normal to them, or alternatively if we are working with a rigid body. If we ignore this, we arrive at Bernoulli's Principle of Static Virtual Work: 
+\[
+	\sum_i^N \vec F_i^A \cdot \delta \vec r_i = 0
+\]
+That's fine and good, but in a dynamical system, things are moving according to Newton's Second Law - which, as a reminder, is 
+\[
+	\vec F = \dv{\vec p}{t} = \dot{\vec p} \implies \vec F - \dot{\vec p} = 0.
+\]
+Repeating this analysis with moving objects, we have to account for the movement of these objects through their momentum, $\vec p_i$, in order to obtain zero virtual work. Thus, with an analogous analysis, we arrive at \textit{d'Alembert's Principle}, 
+\[
+	\sum_i^N (\vec F_i^A - \dot{\vec {p_i}}) \cdot \delta \vec r_i = 0
+\]
+
+Recall in our discussion last week that we could break down systems into $N$ independent generalized coordinates $q_j$ that allow us to skirt around these constraint forces. This means each of the variations of these coordinates, $\delta q_j$, are independent, and we can break it down as such with the chain rule:
+\[
+	\delta \vec r_i = \sum_j^N \pdv{\vec r_i}{q_j} \delta q_j
+\]	
+We can similarly express the velocity of a particle in these coordinates, but now we must include a temporal term, as this is no longer virtual: 
+\[
+ \dot{\vec{r_i}} = \dv{\vec r_i}{t} = \sum_j^N \pdv{\vec r_i}{q_j} \dv{q_j}{t} + \pdv{\vec r_i}{t} = \sum_j^N \pdv{\vec r_i}{q_j} \dot q_j + \pdv{\vec r_i}{t} 
+\]
+With this, we can break d'Alembert's Principle into contributions based on variations of coordinates. We look first at the contributions from the applied force terms: 
+\[
+	\sum_i^N \vec F_i^A \cdot \delta \vec r_i = \sum_i^N \sum_j^N \left(F_i^A \cdot \pdv{\vec r_i}{q_j} \right) \delta q_j = \sum_j^N Q_j \delta q_j.
+\]
+We have organized these terms into components of the \textit{generalized force} $Q_j$, where each component $Q_j$ is defined as 
+\[
+	Q_j = \sum_i^N F_i^A \cdot \pdv{\vec r_i}{q_j}.
+\]
+Now, let's look at the momentum terms, and see if we can coax it in to a form that is favorable to us. We're going to "reverse-product rule", applying Clairaut whenever we can to put things in terms of derivatives in $q_j$, and rearrange terms until we can either recognize something familiar.
+\begin{align*}
+	\sum_i^N \dot{\vec{p_i}} \cdot \delta \vec r_i &= \sum_i^N \sum_j^N \left( m \ddot{\vec {r_i}} \cdot \pdv{\vec r_i}{q_j} \right) \delta q_j  = \sum_i^N \sum_j^N \left[ m\dv{}{t} \left(\dot{\vec{r_i}} \cdot \pdv{\vec r_i}{q_j} \right) - m \dot{\vec{r_i}} \cdot \pdv{\dot{\vec {r_i}}}{q_j} \right]\delta q_j \\
+	&= \sum_i^N \sum_j^N \left[m \dv{}{t} \left(\dot{\vec{r_i}}  \cdot \pdv{\dot{\vec{r_i}}}{\dot{q_j}} \right)  - m \dot{\vec{r_i}} \cdot \pdv{\dot{\vec{r_i}}}{q_j} \right] \delta q_j 
+\end{align*}
+Notice that $\pdv{\dot{\vec{r_i}}}{\dot{q_j}} = \pdv{\vec r_i}{q_j}$, so we can substitute:
+\begin{align*}
+\sum_i^N \sum_j^N \left[m \dv{}{t} \left(\dot{\vec{r_i}}  \cdot \pdv{\dot{\vec{r_i}}}{\dot{q_j}} \right)  - m \dot{\vec{r_i}} \cdot \pdv{\dot{\vec{r_i}}}{q_j} \right] \delta q_j 
+	&= \sum_i^N \sum_j^N \left[m \dv{}{t} \left( \frac{1}{2} \pdv{\dot{r_i}^2}{\dot{q_j}} \right)  - m \frac{1}{2} \pdv{\dot{r_i}^2}{q_j} \right] \delta q_j  \\
+	&=  \sum_j^N \left[ \dv{}{t} \left( \pdv{K}{\dot{q_j}} \right) - \pdv{K}{q_j} \right] \delta q_j 
+\end{align*}
+where $K$ here is the total kinetic energy. 
+
+Plugging back into d'Alembert's Principle, we now only have stuff dependent on the coordinates $q_j$:
+\[
+	\sum_j^N \left(Q_j - \dv{}{t} \left( \pdv{K}{\dot{q_j}} \right) + \pdv{K}{q_j} \right) \delta q_j = 0
+\]
+We can split the generalized force into a conservative component, which is the negative gradient of some potential $V$, and an extra part consisting of non-conservative, velocity dependent, or other constraint forces, $Q^{EX}$: 
+\[
+	Q = -\grad V + Q^{EX}
+\]
+Again, we break this down along coordinates, and we have
+\[
+	\sum_j^N \left(-\pdv{V}{q_j} + Q^{EX}_j - \dv{}{t} \left( \pdv{K}{\dot{q_j}} \right) + \pdv{K}{q_j} \right) \delta q_j = 0
+\]
+Combining terms and flipping the overall sign, we have
+\[
+\sum_j^N \left(\dv{}{t} \left( \pdv{K}{\dot{q_j}} \right) + \pdv{(K-V)}{q_j} - Q^{EX}_j \right) \delta q_j = 0
+\]
+Since the potential is only dependent on position, we can add zero to this sum without changing its value. Let's add the fairly contrived term $\sum_j^N \dv{}{t} \left(\pdv{V}{\dot{q_j}}  \right) \delta q_j $, which is zero because mechanical potential energies do not depend on the time-derivatives of the coordinates. Therefore, we have: 
+\[
+\sum_j^N \left(\dv{}{t} \left( \pdv{(K-V)}{\dot{q_j}} \right) + \pdv{(K-V)}{q_j} - Q^{EX}_j \right) \delta q_j = 0
+\]
+Each of these terms must be zero independently of one another, so we have
+\[
+	\dv{}{t}\pdv{(K-V)}{\dot{q_j}} - \pdv{(K-V)}{q_j} = Q^{EX}_j 
+\]
+and if we assume that no contributions are from those extra forces, we have
+\[
+\dv{}{t}\pdv{(K-V)}{\dot{q_j}} - \pdv{(K-V)}{q_j} = 0 
+\]
+But wait... that looks like Euler-Lagrange! In fact, we have now shown that if we let $\lagr = K - V$ in nice systems, we get the Euler-Lagrange equations to show up instead of Newton's Laws for an equally valid formulation of mechanics. We call $\lagr$ the \textit{Lagrangian}. We can now apply Euler-Lagrange to get the equations of motion of the system directly without much free-body diagram work. Thus, we have successfully constructed a new framework for mechanics involving energy and without vector quantities explicitly woven into it (ie. forces). We also don't need to be worried about constraints, because we can choose what our coordinates are, as long as they are independent. That's pretty nice! 
+
+A sidenote -- we can also introduce additional constraints with the Lagrange multipliers method, which allows us to put in extra holonomic constraints on the system that can't necessarily be wrapped up in some variable. If we introduce these terms, the full Euler-Lagrange equation looks more like 
+\[
+	\dv{}{t}\pdv{\lagr}{\dot{q_j}} - \pdv{\lagr}{q_j} = \sum_{k=1}^r \lambda_k \pdv{g_k}{q_j} + Q^{EXC}_j
+\]
+where the $g_k$ are the extra constraints and the $\lambda_k$ are the Lagrange multipliers associated with them. Now, the additional generalized force term $Q^{EXC}_j$ is limited to all the extra forces that are non-conservative or are velocity-dependent. 
+
+Seeing that the Euler-Lagrange equations are satisfied, given our variational calculus knowledge from last time, we are led to define a quantity called the \textbf{action} $S$ of the system on a time interval $[t_1, t_2]$, a functional that integrates our Lagrangian, a function of $N$ generalized coordinates, from $t_1$ to $t_2$: 
+\[
+	S[\mathbf q] = \int_{t_1}^{t_2} \lagr(t, \mathbf q, \dot{\mathbf q}) \, dt
+\]
+As the Euler-Lagrange equations are true, we thus must have the first variation of the action be zero, or 
+\[
+	\delta S = \delta \int_{t_1}^{t_2} \lagr(t, \mathbf q, \dot{\mathbf q}) \, dt = 0.
+\]
+This is the \textbf{principle of stationary action}, implying that nature tends to minimize this energy-related quantity or make it take on extremal values. This idea can be motivated to some extent from optics, and noting that light moves in such a way to minimize its path length and time taken to travel. Philosophically, this is a different perspective than Newtonian mechanics, which is based around inertial frames and stating how objects move subject to forces. 
+

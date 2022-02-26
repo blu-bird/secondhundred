@@ -1,0 +1,78 @@
+\subsection {Degenerate Perturbation Theory}
+We now consider the problem of degenerate perturbation theory. We will analyze the case where the degeneracy is lifted at first order; that is, we will assume that the first order correction is different for different degenerate states. The case where the degeneracy is not lifted at the first order is more complicated and will not be discussed here. 
+\subsection* {Example}
+To understand why a degeneracy presents a problem, we consider a simple example. Suppose \[H^{(0)} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}\] and \[\delta H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.\] Then \begin{equation}
+H (\lambda) = \begin{pmatrix} 1 & \lambda \\ \lambda & 1 \end{pmatrix}.
+\end{equation}
+One set of eigenvectors of $H^{(0)}$ is 
+\[\ket{0^{(0)}} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \ket{1^{(0)}} = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \]
+with the degenerate eigenvalue 1. 
+
+We find, though, that when we solve for the eigenvectors and eigenvalues of $H(\lambda)$, we get eigenvectors 
+$\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1 \end{pmatrix}$ and $\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1 \end{pmatrix}$ with eigenvalues $1+\lambda$ and $1-\lambda$, respectively.
+
+We might be tempted to think that, somehow, the system has "jumped" from one set of eigenvectors to another. What actually happened, though, is that we chose the "wrong" set of eigenvectors for the initial matrix. Because of the degeneracy, there is some ambiguity in which eigenvectors we choose. We have to choose the "right" basis to solve the problem effectively. 
+
+\subsection* {Systematic Analysis}
+Let us now derive general equations for a degeneracy that is lifted at first order.
+We assume that there are N orthonormal degenerate eigenstates all with energy $E_n^{(0)}$, which we will denote by $\ket{n^{(0)}; k}$, where $k$ ranges from $1$ to $N$. Then we have \[\braket{n^{(0)};p}{n^{(0)};l} = \delta_{pl} \] and \[ H^{(0)} \ket{n^{(0)},k} = E_n^{(0)}. \] The degenerate eigenstates span a space $\mathbb{V}_N$ of dimension N, and the total state space $\mathcal{H}$ can be written as a direct sum $\mathcal{H} = \mathbb{V}_N \oplus \hat{V}$, where $\hat{V}$ is spanned by the eigenstates of $H^{(0)}$ not in $\mathbb{V}_N$.
+
+We now consider the evolution of the degenerate eigenstates as the perturbation is turned on. We assume that $\ket{n^{(0)};k}$ evolves continuously to \[\ket{n;k}_\lambda = \ket{n^{(0)};k} + \lambda \ket{n^{(1)};k} + \lambda^2 \ket{n^{(2)};k} + \mathcal{O}(\lambda^3) \]
+with energy 
+\[ E_{n,k} (\lambda) = E_n^{(0)} + \lambda E_{n,k}^{(1)} + \lambda^2 E_{n,k}^{(2)} + \mathcal{O}(\lambda^3).\]
+Substituting these forms into the energy eigenstate equation will give completely analogous equations to those in the nondegenerate case (equations \cref{eq:0,eq:1,eq:2}). We have
+\begin{align}
+H^{(0)} \ket{n^{(0)};k} &= E_n^{(0)} \ket{n^{(0)};k},  \label{eq:deg0}\\
+H^{(0)} \ket{n^{(1)};k} + \delta H \ket{n^{(0)};k} &= E_n^{(0)} \ket{n^{(1)};k} + E_{n,k}^{(1)} \ket{n^{(0)};k},  \label{eq:deg1}\\
+H^{(0)} \ket{n^{(2)};k} + \delta H \ket{n^{(1)};k} &= E_n^{(0)} \ket{n^{(2)};k} + E_{n,k}^{(1)} \ket{n^{(1)};k} + E_{n,k}^{(2)} \ket{n^{(0)};k},  \label{eq:deg2}\\
+&... \nonumber
+\end{align} 
+As before, equation \ref{eq:deg0} is satisfied by definition. We now consider equation \ref{eq:deg1}. Let us act on both sides with $\bra{n^{(0)}; l}$, where $l \neq k$. We have 
+\begin{align}
+\bra{n^{(0)}; l}H^{(0)} \ket{n^{(1)};k}+\bra{n^{(0)}; l} \delta H \ket{n^{(0)};k} &= \bra{n^{(0)}; l}E_n^{(0)} \ket{n^{(1)};k}+\bra{n^{(0)}; l}E_{n,k}^{(1)} \ket{n^{(0)};k},\nonumber \\
+E_n^{(0)} \braket{n^{(0)};l}{n^{(1)};k} + \bra{n^{(0)}; l} \delta H \ket{n^{(0)};k} &= E_n^{(0)} \braket{n^{(0)};l}{n^{(1)};k} + E_{n,k}^{(1)} \braket{n^{(0)};l}{n^{(0)};k},\nonumber \\
+ \bra{n^{(0)}; l} \delta H \ket{n^{(0)};k} &= E_{n,k}^{(1)} \braket{n^{(0)};l}{n^{(0)};k}, \nonumber \\
+ \bra{n^{(0)}; l} \delta H \ket{n^{(0)};k} &= E_{n,k}^{(1)} \delta_{lk}.\label{eq:deg3}
+\end{align}
+Equation \ref{eq:deg3} tells us that we \textit{must} choose the basis of degenerate states such that $\delta H$ is diagonal in the chosen basis. Note that this means $\delta H$ must be diagonal in $\mathbb{V}_N$, \textit{not} be diagonal on the whole space $\mathcal{H}$.
+In addition, when $l = k$, equation \ref{eq:deg3} gives us the first-order correction to the energy:
+\[\bra{n^{(0)}; k} \delta H \ket{n^{(0)};k} = E_{n,k}^{(1)} \delta_{lk}\label{eq:degEFirstOrder}.\] This is \textit{exactly} the same equation as in the nondegenerate case (see equation \ref{eq:nondegen1}). The difference is that in the degenerate case we must choose our basis states appropriately. 
+
+In addition, we can't get the full first order correction to the state from equation \ref{eq:deg1} alone. We can get some information from equation \ref{eq:deg1} by acting with a nondegenerate state $\bra{p^{(0)}},$ where $p \neq n$, with unperturbed energy $E_p^{(0)}$. We find that
+\begin{align}
+\bra{p^{(0)}}H^{(0)} \ket{n^{(1)};k}+\bra{p^{(0)}} \delta H \ket{n^{(0)};k} &= \bra{p^{(0)}}E_n^{(0)} \ket{n^{(1)};k}+\bra{p^{(0)}}E_{n,k}^{(1)} \ket{n^{(0)};k},\nonumber \\
+(E_n^{(0)}-E_p^{(0)}) \braket{p^{(0)}}{n^{(1)};k} &= \bra{p^{(0)}} \delta H \ket{n^{(0)};k} \nonumber \\
+\braket{p^{(0)}}{n^{(1)};k} &=  \frac{1}{E_n^{(0)}-E_p^{(0)}}\bra{p^{(0)}} \delta H \ket{n^{(0)};k} \label{eq:deg1corr1}
+\end{align}
+Equation \ref{eq:deg1corr1} gives the component of $\ket{n^{(1)};k}$ in $\hat{V}$ as 
+\begin{equation}
+\ket{n^{(1)};k}\Bigg\rvert_{\hat{V}} = 
+\sum\limits_{p \neq n} \frac{\bra{p^{(0)}} \delta H 
+\ket{n^{(0)};k}}{E_n^{(0)}-E_p^{(0)}} \ket{p^{(0)}}\label{eq:deg1corr1s}.\end{equation}
+
+This is \textit{all} the information we can extract from equation \ref{eq:deg1}. We have to use equation \ref{eq:deg2}, which involves the second-order terms, to derive the component of $\ket{n^{(1)};k}$ in $\mathbb{V}_N$. To do this, we hit equation \ref{eq:deg2} with $\bra{n^{(0)}; l}$ and find that
+\begin{align*}
+\bra{n^{(0)}; l}H^{(0)} \ket{n^{(2)};k} + \bra{n^{(0)}; l}\delta H \ket{n^{(1)};k} &= \bra{n^{(0)}; l}E_n^{(0)} \ket{n^{(2)};k} + \bra{n^{(0)}; l} E_{n,k}^{(1)} \ket{n^{(1)};k} + \bra{n^{(0)}; l} E_{n,k}^{(2)} \ket{n^{(0)};k}, \\
+\bra{n^{(0)}; l}\delta H \ket{n^{(1)};k} &= E_{n,k}^{(1)} \braket{n^{(0)};l}{n^{(1)};k} + E_{n,k}^{(2)} \delta_{lk}.
+\end{align*}
+When $l \neq k$, this simplifies to 
+\begin{equation}
+\bra{n^{(0)}; l}\delta H \ket{n^{(1)};k} = E_{n,k}^{(1)} \braket{n^{(0)};l}{n^{(1)};k}. \label{idk}
+\end{equation}
+Recall that $\delta H$ is diagonal in $\mathbb{V}_N$, so the LHS of equation \ref{idk} simplifies to 
+\begin{equation}
+E_{n,l}^{(1)} \braket{n^{(0)};l}{n^{(1)};k} + \sum\limits_{p \neq n} \frac{\bra{p^{(0)}} \delta H 
+\ket{n^{(0)};k}}{E_n^{(0)}-E_p^{(0)}} \bra{n^{(0)}; l}\delta H \ket{p^{(0)}}
+ = E_{n,k}^{(1)} \braket{n^{(0)};l}{n^{(1)};k}. \label{ugly}.
+\end{equation}
+Equation \ref{ugly} can be solved to find the component of $\ket{n^{(1)};k}$ in $\mathbb{V}_N$. In the end, we find that
+
+\begin{align*}
+\ket{n;k}_\lambda &= \ket{n^{(0)};k}
+- \lambda \left( \sum\limits_p \frac{\bra{p^{(0)}}\delta H \ket{n^{(0)};k}}{E_p^{(0)}-E_n^{(0)}}
++ \sum\limits_{\ell\neq k} \frac{\ket{n^{(0)};\ell}}{E_{n,k}^{(1)}-E_{n,\ell}^{(1)}} \sum\limits_{p} \frac{\bra{n^{(0)};\ell}\delta H \ket{p^{(0)}} \bra{p^{(0)}}\delta H\ket{n^{(0)};k}}{E_p^{(0)}-E_n^{(0)}}
+\right) + \mathcal{O} (\lambda^3).
+\end{align*}
+
+This concludes our treatment of the first-order correction for degenerate perturbation theory in which the degeneracy is lifted at the first order.
+

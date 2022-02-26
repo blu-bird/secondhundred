@@ -1,0 +1,174 @@
+\section{Quantum Harmonic Oscillator}
+For our next problem, we consider the potential $V(x) = \frac{1}{2} m \omega^2 x^2$. This is equivalent to the familiar simple harmonic oscillator potential $\frac{1}{2} kx^2$ since $\omega^2 = \tfrac{k}{m}$. The relevant Hamiltonian is then 
+\begin{equation}
+    \hat{H} = \frac{\hat{p}^2}{2m} + \frac{1}{2} m\omega^2 \hat{x}^2 \label{shoH}.
+\end{equation}
+The energy eigenvalue equation is 
+\begin{equation}
+    -\frac{\hbar^2}{2m} \frac{d^2 \psi}{d x^2} + \frac{1}{2} m\omega^2 x^2 = E \psi.
+    \label{schrodingerSHO}
+\end{equation}
+
+We begin our consideration of this system with dimensional analysis. The parameters here are $\hbar$, $\omega$, and $m$. Since $\hbar$ has units of J $\cdot$ s, $\hbar \omega$ has units of energy. This is the energy scale of the system. A good order-of-magnitude estimate for the ground state energy might be $\hbar \omega$. We will see how good of an estimate this really is in our analysis.
+
+%\subsection{Unit Removal}
+%The energy eigenvalue equation is 
+%\begin{equation}
+%    -\frac{\hbar^2}{2m} \frac{d^2 \psi}{d x^2} + \frac{1}{2} m\omega^2 x^2 = E \psi.
+%    \label{schrodingerSHO}
+%\end{equation}
+%The first thing we should do here is strip the units from the equation. We already have our characteristic energy $\hbar \omega$. We also define a characteristic length $$L = \sqrt\frac{\hbar}{m\omega}.$$ To get rid of the units, we would like to write the equation in terms of $\mathcal{E} = \frac{E}{\hbar \omega}$ and $u = \frac{x}{L}.$ We have 
+%\begin{align}
+%-\frac{\hbar^2}{2m L^2} \frac{d^2 \psi}{d u^2} + \frac{1}{2} m\omega^2 L^2 u^2 &= \mathcal{E} \hbar \omega \psi, \nonumber \\
+%-\frac{\hbar \omega}{2} \frac{d^2 \psi}{d u^2} + \frac{1}{2} \hbar \omega u^2 &= \mathcal{E} \hbar \omega \psi, \nonumber \\
+%- \frac{d^2 \psi}{d u^2} +  u^2 &= 2\mathcal{E}\psi. \label{schrodingerSHOnounits} 
+%\end{align}
+%Equation \ref{schrodingerSHOnounits} is our unit-free version of the Schrodinger equation for this system. 
+
+\subsection{Energy Eigenstates and Spectrum}
+We solve the Schrodinger equation for the harmonic oscillator using a nice trick. The Hamiltonian for this system look like a sum of squares, so we could try to factor it. We try
+\begin{equation}
+\frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2 \stackrel{?}{=} \left(\sqrt{\frac{m}{2}} \omega \hat{x}-i \frac{\hat{p}}{\sqrt{2m}}  \right)\left(\sqrt{\frac{m}{2}} \omega \hat{x} +  i \frac{\hat{p}}{\sqrt{2m}}  \right). \label{wrongfactorization} 
+\end{equation}
+The problem with equation \ref{wrongfactorization}, though, is that $\hat{x}$ and $\hat{p}$ do not commute, so the cross terms do not cancel. Instead, we have
+\begin{align*}
+\left(\sqrt{\frac{m}{2}} \omega \hat{x}-i \frac{\hat{p}}{\sqrt{2m}}  \right)\left(\sqrt{\frac{m}{2}} \omega \hat{x} +  i \frac{\hat{p}}{\sqrt{2m}}  \right) &=  \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2 + \frac{i\omega}{2} [\hat{x}, \hat{p}],  \\
+&= \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2 - \frac{ \hbar \omega}{2},\\
+\end{align*}
+so
+\begin{equation}
+\hat{H} =  \frac{\hat{p}^2}{2m} + \frac{1}{2} m \omega^2 \hat{x}^2 =  \hbar \omega \left(\hat{a}^\dagger \hat{a}  + \frac{1}{2}\right), \label{factoredSHOH} 
+\end{equation}
+where we define 
+\begin{equation}
+\hat{a} = \sqrt{\frac{m\omega}{2\hbar}} \left(\hat{x} + \frac{i}{m\omega} \hat{p} \right) \label{aSHO}.
+\end{equation}
+Note that $\hat{a}$ is \textit{not} Hermitian, since 
+\begin{equation}
+\hat{a}^\dagger = \sqrt{\frac{m\omega}{2\hbar}} \left(\hat{x} - \frac{i}{m\omega} \hat{p} \right) \label{aconjSHO}.
+\end{equation}
+We now consider the commutation relation between $\hat{a}$ and its adjoint. This will be very important soon. We find that 
+\begin{align}
+\left[\hat{a}, \hat{a}^\dagger\right] &= \left[\sqrt{\frac{m\omega}{2\hbar}} \left(\hat{x} + \frac{i}{m\omega} \hat{p} \right),  \sqrt{\frac{m\omega}{2\hbar}} \left(\hat{x} - \frac{i}{m\omega} \hat{p} \right) \right],\nonumber\\
+&= \frac{m\omega}{2\hbar} \left( \left[\hat{x},\hat{x}\right] - \frac{i}{m\omega} \left[\hat{x},\hat{p}\right] + \frac{i}{m\omega} \left[\hat{p},\hat{x}\right] + \frac{1}{m^2 \omega^2} \left[\hat{p}, \hat{p} \right] \right),\nonumber\\
+&= \frac{i}{2\hbar} \left([\hat{p},\hat{x}]-[\hat{x},\hat{p}] \right)\nonumber\\
+&= 1\label{aSHOcommutation}.
+\end{align}
+Now, suppose we have some energy eigenstate $\ket{\phi}$ with energy $E$. Let's act upon $\hat{a} \ket{\phi}$ with $\hat{H}$. We find 
+\begin{align}
+\hat{H} \hat{a}\ket{\phi} &= \hbar \omega \left(\hat{a}^\dagger\hat{a} + \frac{1}{2} \right) \hat{a}\ket{\phi},\nonumber \\
+&= \hbar \omega \left(\hat{a}^\dagger\hat{a}\hat{a} + \frac{1}{2}\hat{a} \right) \ket{\phi},\nonumber \\
+&= \hbar \omega \left[\left(\hat{a}\hat{a}^\dagger -1 \right) \hat{a}+ \frac{1}{2}\hat{a} \right]\ket{\phi}, \nonumber \\
+&= \hbar \omega \left[\hat{a} \left(\hat{a}^\dagger\hat{a} + \frac{1}{2} \right)  - \hat{a} \right] \ket{\phi}, \nonumber\\
+&= \left(E - \hbar \omega \right) \hat{a} \ket{\phi}.\label{lowered}
+\end{align}
+Therefore $\hat{a} \ket{\phi}$ is another energy eigenstate with energy $E-\hbar \omega$. Equation \ref{lowered} shows that $\hat{a}$ lowers an eigenstate's energy. If we continue acting with $\hat{a}$, the energy will continue to be lowered in increments of $\hbar \omega$. 
+Analogously, we can consider the state $\hat{a}^\dagger \ket{\phi}$. We have 
+\begin{align}
+\hat{H} \hat{a}\ket{\phi} &= \hbar \omega \left(\hat{a}^\dagger \hat{a}+ \frac{1}{2} \right) \hat{a}^\dagger\ket{\phi},\nonumber \\
+&= \hbar \omega \left(\hat{a}^\dagger \hat{a}\hat{a}^\dagger + \frac{1}{2}\hat{a}^\dagger \right) \ket{\phi},\nonumber \\
+&= \hbar \omega \left[\hat{a}^\dagger\left(\hat{a}^\dagger\hat{a} +1 \right) + \frac{1}{2}\hat{a}^\dagger \right]\ket{\phi}, \nonumber \\
+&= \hbar \omega \left[\hat{a}^\dagger \left(\hat{a}^\dagger\hat{a}+ \frac{1}{2} \right)  + \hat{a}^\dagger \right] \ket{\phi}, \nonumber\\
+&= \left(E + \hbar \omega \right) \hat{a}^\dagger \ket{\phi}.\label{raised}
+\end{align}
+Just as $\hat{a}$ lowers states, $\hat{a}^\dagger$ raises states. In fact, $\hat{a}$ is called the \textbf{lowering operator}, and $\hat{a}^\dagger$ is called the \textbf{raising operator}.
+
+It seems like we can keep raising and lowering to form an infinite ladder of states. This doesn't make sense, though. 
+Consider the state $\hat{a} \ket{\phi}$ again. Define $n$ so that the energy associated with $\ket{\phi}$ is $\left(n+\frac{1}{2} \right) \hbar\omega$. Note that, at this point, we \textit{do not know} whether $n$ is an integer. Let's take the inner product of this state with itself:
+\begin{equation}
+\left( \hat{a} \ket{\phi} \right)^\dagger \hat{a}\ket{\phi} = \bra{\phi} \hat{a}^\dagger \hat{a} \ket{\phi}  = n \braket{\phi}{\phi}.
+\end{equation}
+If we can continue lowering forever, $n$ will eventually be negative. But this is impossible – the norm squared of a state \textit{must} be nonnegative. The only way to get out of this is if, at some point, there's a state that, when acted upon by $\hat{a}$, gives the zero vector. That is, the lowest energy state (the ground state) must be annihilated by $\hat{a}$. For this reason, $\hat{a}$ is also known as the \textbf{annihilation operator}. 
+
+This requirement allows us to easily find the ground state $\ket{\psi_0}$. We must have 
+\begin{align*}
+\hat{a} \ket{\psi_0} &= 0,  \\
+\left(\hat{x}+\frac{i}{m\omega}\hat{p} \right) \ket{\psi_0} &= 0,  \\
+x  \psi_0 (x) + \frac{\hbar}{m\omega} \frac{d\psi_0}{dx} &= 0,  \\ 
+-\frac{m\omega x}{\hbar} dx&= \frac{d\psi_0}{\psi_0},  \\
+\psi_0 (x) &= Ne^{-\frac{m\omega x^2}{2\hbar}}.
+\end{align*}
+We find $N$ by normalizing the wavefunction:
+\begin{align*}
+\braket{\psi_0}{\psi_0} &= \int\limits_{-\infty}^{\infty} N^2 e^{-\frac{m\omega}{\hbar}x^2} dx, \\
+1 &= N^2 \sqrt{\frac{\hbar \pi}{m\omega}},\\
+N &= \sqrt[4]{\frac{m\omega}{\hbar\pi}}.
+\end{align*}
+Thus the ground state is 
+\begin{equation}
+\sqrt[4]{\frac{m\omega}{\hbar\pi}} e^{-\frac{m\omega x^2}{2\hbar}}. \label{SHOgroundstate}
+\end{equation}
+We found this ground state by solving a \textit{separable differential equation}! This is \textit{much} simpler than trying to solve the full time-independent Schrodinger equation (equation \ref{schrodingerSHO}). 
+
+We can easily find the ground state energy without having to use the explicit ground state wavefunction. We have 
+\begin{equation}
+\hat{H} \ket{\psi_0} = \hbar \omega \left(\hat{a}^\dagger\hat{a}+\frac{1}{2} \right) \ket{\psi_0} = \frac{\hbar \omega}{2} \ket{\psi_0},\\
+\end{equation}
+so the ground state energy is $\frac{\hbar \omega}{2}$. This differs by only a factor of two from the simple estimate we made using dimensional analysis at the beginning of this analysis.
+
+It is now straightforward to devise a procedure to find the rest of the energies and energy eigenstates. Since the raising and lowering operators act in increments of $\hbar \omega$, the energies of the harmonic oscillator take the form 
+\begin{equation} 
+E_n  = \hbar \omega\left(n+\frac{1}{2} \right),
+\end{equation}
+where $n$ must be a nonnegative integer. The associated eigenstates can be found by repeatedly acting with the raising operator and normalizing the result. We can find a general formula for these states by considering the inner product of $\hat{a}^\dagger \ket{n}$ with itself. We have 
+\begin{equation*}
+\left( \hat{a}^\dagger \ket{n} \right)^\dagger \hat{a}^\dagger\ket{n} = \bra{\phi}  \hat{a} \hat{a}^\dagger\ket{\phi} = \bra{\phi}  \left( \hat{a}^\dagger\hat{a} + 1\right)\ket{\phi}  = (n+1) \braket{n}{n},
+\end{equation*}
+so 
+\begin{equation*}
+\left[\left( \hat{a}^\dagger\right)^n \ket{0} \right]^\dagger\left( \hat{a}^\dagger\right)^n\ket{0} = n!.
+\end{equation*}
+Therefore,
+\begin{equation}
+\ket{n} = \frac{\left( \hat{a}^\dagger\right)^n}{\sqrt{n!}} \ket{0}.
+\end{equation}
+It turns out that the wavefunctions associated with these states are 
+\begin{equation} \psi_n (x) = \frac{1}{\sqrt{2^n n!}} \left (\frac{m\omega}{\pi \hbar} \right)^{1/4} e^{-\frac{m \omega x^2}{2\hbar}} H_n \left(\sqrt{\frac{m\omega}{\hbar}} x\right), \end{equation} where $H_n$ are the \textbf{Hermite polynomials}. We will not discuss these polynomials in detail here. The first few are detailed in Table \ref{hermite}. 
+\begin{table}[ht]
+\centering
+\caption{Hermite Polynomials}
+\begin{tabular}{|c|c|}
+\hline
+n & $H_n (x)$ \\
+\hline
+0 & 1 \\
+1 & $2x$ \\
+2 & $4x^2-2$ \\
+3 & $8x^3-12x$ \\
+4 & $16 x^4-48 x^2 +12$ \\
+\hline
+\end{tabular}
+\label{hermite}
+\end{table}
+\subsection{Coherent States}
+To conclude our brief treatment of the harmonic oscillator, we discuss the \textbf{coherent states}. These are the eigenstates of the lowering operator. Let $\ket{C_\alpha}$ be the coherent state satisfying $\hat{a} \ket{C_\alpha} = \alpha \ket{C_\alpha}$. We will set \begin{equation} \ket{C_\alpha}  = \sum \limits_{n=0}^{\infty} c_n(\alpha) \ket{n}. \end{equation}
+We must have 
+\begin{align*}
+\alpha \ket{C_\alpha} &=  \hat{a} \ket{C_\alpha}, \\
+\sum \limits_{n=0}^{\infty}\alpha c_n(\alpha) \ket{n} &= \sum \limits_{n=0}^{\infty} c_n(\alpha) \hat{a} \ket{n}, \\
+\sum \limits_{n=0}^{\infty}\alpha c_n(\alpha) \ket{n} &= \sum \limits_{n=0}^{\infty} c_n(\alpha) \sqrt{n} \ket{n-1},\\
+\sum \limits_{n=0}^{\infty}\alpha c_n(\alpha) \ket{n} &= \sum \limits_{n=0}^{\infty} c_{n+1}(\alpha) \sqrt{n+1} \ket{n},\\
+\alpha c_n(\alpha) &=  c_{n+1}(\alpha) \sqrt{n+1},\\
+c_{n+1} (\alpha) &= \frac{\alpha}{\sqrt{n+1}} c_n (\alpha), \\
+c_n (\alpha) &= \frac{\alpha^n}{\sqrt{n!}} c_0 (\alpha).
+\end{align*}
+We now normalize the wavefunction:
+\begin{align*}
+\braket{C_\alpha}{C_\alpha} &= \sum \limits_{n=0}^{\infty} |c_n|^2, \\
+\sum \limits_{n=0}^{\infty } \frac{|\alpha|^{2n}}{n!} |c_0 (\alpha)|^2 &= 1,\\
+c_0 (\alpha) &= e^{-\frac{|\alpha|^2}{2}}.
+\end{align*}
+Thus, 
+\begin{equation}
+ \ket{C_\alpha} = e^{-\frac{|\alpha|^2}{2}}\sum\limits_{n=0}^{\infty} \frac{\alpha^n}{\sqrt{n!}} \ket{n}.
+\end{equation}
+
+If we calculate $\langle \hat{x} \rangle$, we will find that 
+\begin{equation}
+\langle \hat{x} \rangle (\alpha, t) = \sqrt{\frac{2\hbar}{m\omega}} \operatorname{Re} (\alpha e^{-i\omega t}) \label{coherentexpvalue}.
+\end{equation}
+The expectation value of the position oscillates with amplitude $\sqrt{\frac{2\hbar}{m\omega}}  |\alpha|$ at angular frequency $\omega$.This is why these states are called coherent states – they behave as we would expect a classical oscillator to expect. It also turns out that 
+\begin{equation}
+\Delta x = \sqrt{\frac{\hbar}{2m\omega}}. \label{coherentspread}
+\end{equation}
+This is totally independent of time. The derivations of equations \ref{coherentexpvalue} and \ref{coherentspread} are left as an exercise.

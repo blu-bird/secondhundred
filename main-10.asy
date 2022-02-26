@@ -1,0 +1,32 @@
+if(!settings.multipleView) settings.batchView=false;
+settings.tex="pdflatex";
+settings.inlinetex=true;
+deletepreamble();
+defaultfilename="main-10";
+if(settings.render < 0) settings.render=4;
+settings.outformat="";
+settings.inlineimage=true;
+settings.embed=true;
+settings.toolbar=false;
+viewportmargin=(2,2);
+
+import solids;
+import three;
+size(8cm);
+draw((1, 1, 1)--(0, 1, 1), EndArrow3);
+draw((2, 1, 1)--(3, 1, 1), EndArrow3);
+draw((2, 1, 1)--(1, 1, 1), linetype("2 4"));
+currentprojection=orthographic(0.7, 1, 1);
+currentlight=nolight;
+triple start = (1,1,1);
+real length = 1;
+real radius = 0.5;
+triple ax = (1,0,0);
+revolution r = cylinder(start,radius,length,ax);
+draw(r,black);
+
+draw((2, 1, 1)--(2, 1, 1.5), grey);
+label("$y$", (2, 1, 1.25), dir(180));
+draw((2, 2, 1)--(1, 2, 1), linetype("8 8"), EndArrow3);
+draw((1, 2, 1)--(2, 2, 1), linetype("8 8"), EndArrow3);
+label("$L$", (1.5, 2, 1), dir(315));

@@ -1,0 +1,56 @@
+\subsection{Non-Degenerate Perturbation Theory}
+\subsection*{Perturbative Equations}
+We would like to use series expansions to approach this problem, so we begin by adding a parameter $\lambda$ to the problem. We define $H(\lambda) := H^{(0)} + \lambda \delta H$, where $0<\lambda<1$. By varying $\lambda$ from $0$ to $1$, we will continuously turn on the perturbation.
+
+We will now derive the perturbative equations. Note that we will assume that the original Hamiltonian has no degeneracies; that is, each energy has exactly one linearly independent eigenstate associated with it. This is because degeneracies will make our lives significantly more complicated as a perturbation may split a degeneracy, meaning that two states with the same energy may end up with different energies after the perturbation is applied. In 1 dimension, our assumption is fully general for bound states since degeneracies are prohibited.
+
+Suppose our original Hamiltonian have eigenvalues $E_0^{(0)}, E_1^{(0)}, E_2^{(0)},...$ corresponding to eigenvectors $\ket{0^{(0)}}, \ket{1^{(0)}},\ket{2^{(0)}},... .$ We also assume that the energies are ordered, so $E_0^{(0)} < E_1^{(0)} < E_2^{(0)} < ... $. Let $\ket{n}_\lambda$ be the perturbed eigenstate beginning with energy $E_n^{(0)}$, and let $E_n (\lambda)$ be the perturbed energy. We will assume series expansions of the following form:
+\begin{align*}
+\ket{n}_{\lambda} &= \ket{n^{(0)}} + \lambda \ket{n^{(1)}} +  \lambda^2 \ket{n^{(2)}} + ..., \\
+E_n (\lambda) &= E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + ... 
+\end{align*}
+
+We now apply the condition on the eigenstate,
+\begin{align*}
+&(H^{(0)} + \lambda \delta H) \left(\ket{n^{(0)}} + \lambda \ket{n^{(1)}} +  \lambda^2 \ket{n^{(2)}} + ... \right) = E_n (\lambda) \left(\ket{n^{(0)}} + \lambda \ket{n^{(1)}} +  \lambda^2 \ket{n^{(2)}} + ... \right) \\
+&= (E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + ...)\left(\ket{n^{(0)}} + \lambda \ket{n^{(1)}} +  \lambda^2 \ket{n^{(2)}} + ... +  \lambda^k \ket{n^{(k)}}\right).
+\end{align*}
+Considering each side as a polynomial in $\lambda$, we match coefficients. 
+\begin{align}
+H^{(0)} \ket{n^{(0)}} &= E_n^{(0)} \ket{n^{(0)}}, \label{eq:0} \\
+H^{(0)} \ket{n^{(1)}} + \delta H \ket{n^{(0)}} &= E_n^{(0)} \ket{n^{(1)}} + E_n^{(1)} \ket{n^{(0)}}, \label{eq:1} \\
+H \ket{n^{(2)}} + \delta H \ket{n^{(1)}} &= E_n^{(0)} \ket{n^{(2)}} + E_n^{(1)} \ket{n^{(1)}} + E_n^{(2)} \ket{n^{(0)}}, \label{eq:2} \\
+&...\nonumber
+\end{align} In general,
+\begin{equation} H^{(0)} \ket{n^{(j)}} + \delta H \ket{n^{(j-1)}} = \sum_{i=0}^{j} E_n^{(i)} \ket{n^{j-i}}.
+\label{eq:gennondegen}
+\end{equation}
+\subsection*{First-Order Correction}
+The first-order correction to the energy and eigenstate are easy to calculate. Without loss of generality, we assume that the different corrections to the eigenstate are orthogonal to the original state. We can do this because any components that overlap with $\ket{n^{(0)}}$ can be combined into the first term and divided out.
+
+We act on both sides of the equation for the first-order correction to the eigenstate with $ \bra{n^{(0)}}$.
+\begin{align}
+\bra{n^{(0)}}H^{(0)} \ket{n^{(1)}} + \bra{n^{(0)}}\delta H \ket{n^{(0)}} &= \bra{n^{(0)}}E_n^{(0)} \ket{n^{(1)}} + \bra{n^{(0)}}E_n^{(1)}  \ket{n^{(0)}}, \nonumber \\
+\bra{n^{(0)}}\delta H \ket{n^{(0)}} &= E_n^{(1)} , \label{eq:nondegen1}
+\end{align}
+where we used the Hermiticity of $H$ and the orthogonality of $\ket{n^{(0)}}$ and $\ket{n^{(1)}}$ to simplify. This result is incredibly useful because it allows us to calculate the first-order correction to the energy directly from $\ket{n^{(0)}}$ and $\delta H$, both of which are known.
+
+We will now calculate the components of the first-order correction to the state in the original basis. We have 
+\begin{align*} 
+\bra{k^{(0)}}H^{(0)} \ket{n^{(1)}} + \bra{k^{(0)}}\delta H \ket{n^{(0)}} &= \bra{k^{(0)}}E_n^{(0)} \ket{n^{(1)}} + \bra{k^{(0)}}E_n^{(1)} \ket{n^{(0)}}, \\
+(E_k^{(0)}-E_n^{(0)}) \braket{k^{(0)}}{n^{(1)}} &= - \bra{k^{(0)}} \delta H \ket{n^{(0)}} , \\
+\braket{k^{(0)}}{n^{(1)}} &= -\frac{\bra{k^{(0)}} \delta H \ket{n^{(0)}}}{(E_k^{(0)}-E_n^{(0)})},
+\end{align*}
+where we assume that $k \neq n$ (note that if $k=n$, $\bra{k^{(0)}}\ket{n^{(1)}}$ is $0$ by construction).
+
+Therefore,
+\begin{align}
+\ket{n^{(1)}} &= \sum_{k \neq n} \braket{k^{(0)}}{n^{(1)}}\ket{k^{(0)}}, \nonumber \\
+&= -\sum_{k \neq n} \frac{\bra{k^{(0)}} \delta H \ket{n^{(0)}} \ket{k^{(0)}}}{(E_k^{(0)}-E_n^{(0)})}. \label{eq:nondegenn1}
+\end{align}
+This expression makes it clear why our assumption of non-degeneracy was necessary. If there were another state with energy $E_n^{(0)}$, the denominator of the corresponding term in the sum would go to $0$.
+\subsection*{Problems}
+\begin{enumerate}
+\item Consider another anharmonic oscillator with the Hamiltonian $$H = H^{(0)} + \lambda \frac{m^2 \omega^3}{\hbar} \hat{x}^4.$$ Write the Hamiltonian in terms of $\hat{a}$ and $\hat{a}^{\dagger}$, then calculate the first-order correction in the ground-state energy. 
+\item Using that fact that the expectation value of the Hamiltonian on any normalized state is larger than the ground state energy (the variational principle), prove that the first order corrected energy of the non-degenerate ground state overstates the actual exact ground state energy.
+\end{enumerate}

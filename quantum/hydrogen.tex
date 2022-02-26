@@ -1,0 +1,57 @@
+\section{Quantum Hydrogen Atom}
+The last important problem we'll study is the quantum hydrogen atom. We assume that the nucleus is a stationary charge of magnitude $e$ and analyze the electron. We can apply our analysis of central potentials to this problem.
+
+The relevant potential is $V(r) = -\frac{e^2}{r}$. The solutions will take the form $\psi = Y_\ell^m (\theta, \phi) \frac{u(r)}{r},$ where $Y_\ell^m$ are the spherical harmonics and $R(r)$ satisfies the radial equation. The equation we have to solve is 
+\begin{equation}
+-\frac{\hbar^2}{2m} \frac{d^2 u}{dr^2} + \left[-\frac{e^2}{r} + \frac{\hbar^2}{2m} \frac{\ell(\ell+1)}{r^2} \right] u = Eu.
+\end{equation}
+We define the Bohr radius $a_0 \equiv \frac{\hbar^2}{me^2}$ and remove the units from the equation by setting $r = \frac{a_0}{2} x$. Then we have
+\begin{align*}
+    -\frac{2\hbar^2}{ma_0^2} \frac{d^2 u}{dx^2} + \left[-\frac{2e^2}{a_0 x} + \frac{2\hbar^2}{ma_0^2} \frac{\ell(\ell+1)}{x^2} \right] u &= Eu,\\
+     -2e^2 \frac{d^2 u}{dx^2} - \frac{2e^2}{x} u + {2e^2}\frac{\ell(\ell+1)}{x^2}u&= a_0 E u,\\
+     \left(-\frac{d^2}{dx^2} - \frac{1}{x} + \frac{\ell(\ell+1)}{x^2} \right) u &= \frac{a_0}{2e^2} E u.
+\end{align*}
+We now define 
+\begin{equation}\kappa^2 \equiv -\frac{a_0}{2e^2} E > 0. \label{kappa}\end{equation}
+Then the equation is
+\begin{equation}
+     \left(-\frac{d^2}{dx^2} - \frac{1}{x} + \frac{\ell(\ell+1)}{x^2} \right) u = -\kappa^2 u.
+\end{equation}
+
+As $x\to \infty$, the dominating term is the second derivative, so 
+\[u \sim e^{\pm \kappa x}. \] We let \[\rho \equiv \kappa x, \]
+so 
+\begin{equation}
+     \frac{d^2 u}{d\rho^2}   = \left(1- \frac{1}{\kappa \rho} + \frac{\ell(\ell+1)}{\rho^2} \right) u.
+\end{equation}
+
+As $\rho \to \infty$, the constant term dominates, so
+\[u(\rho) \sim e^{-\rho}. \] As $\rho \to 0$, however, the centrifugal term dominates, so 
+\[u(\rho) \sim \rho^{\ell+1}. \] Then a good ansatz is
+\[ u(\rho) = \rho^{\ell+1} e^{-\rho} \nu (\rho). \]
+The radial equation becomes 
+\[ \rho \frac{d^2 \nu}{d\rho^2} + 2(\ell+1-\rho) \frac{d\nu}{d\rho} + \left[\frac{1}{\kappa}-2(\ell+1)\right]\nu = 0. \] 
+We now assume a series solution:
+\[\nu(\rho) = \sum\limits_{j=0}^{\infty} a_j \rho^j. \]
+This gives 
+\[j(j+1)a_{j+1} + 2(\ell+1)(j+1) a_j+1 - 2j a_j + \left[\frac{1}{\kappa} - 2 (\ell+1) \right] a_j = 0, \] so
+\[a_{j+1} =  \frac{2\kappa(j+\ell+1)-1}{\kappa (j+1)(j+2\ell +2)} a_j.\]
+
+For the solution to be normalizable, the series must terminate. Suppose the series goes to degree $N$ at highest. Then
+\begin{align*}
+    2\kappa (N+\ell+1) &= 1,\\
+    N + \ell + 1 &= \frac{1}{2\kappa}.
+\end{align*}
+Now define the \textbf{principal quantum number} $n$ so that $n = N + \ell + 1$. For any given $n$, we must have $n \geq \ell+1$, so $\ell$ ranges from $0$ to $n-1$. From the definition of $\kappa$ (Equation \ref{kappa}), we have 
+\begin{equation}
+    E = -\frac{2e^2}{a_0} \kappa^2 = -\frac{e^2}{2a_0n^2}.
+\end{equation}
+These are the energies of the hydrogen atom.
+
+The solution found here gives the spectrum that's probably familiar to you from chemistry. The principal quantum number $n$ gives the energy, the angular momentum quantum number ranges from $0$ to $n-1$, and the magnetic momentum quantum number $m$ ranges from $-\ell$ to $\ell$. The only quantum number not added here is for the spin of the electron.
+
+The eigenfunction is then \[ \psi_{n\ell m} (r, \theta, \phi) = R_{n \ell} (r) Y_\ell^m (\theta, \phi) = \frac{\rho^{\ell+1}}{r} e^{-\rho} \nu (\rho),\] where $\nu$ is a polynomial of degree $N = n - \ell - 1$. This polynomial is well-known to be 
+$$\nu (\rho) = L_{n-\ell-1}^{2\ell+1} (2\rho), $$ where $$L_{q-p}^p (x) \equiv (-1)^p \left( \frac{d}{dx} \right)^p L_q (x)$$ is an \textbf{associated Laguerre polynomial}, and $$L_q (x) \equiv e^x \left(\frac{d}{dx} \right)^q (e^{-x} x^q)$$ is the $q$th \textbf{Laguerre polynomial}. The final, normalized wavefunctions are
+\begin{equation}
+    \psi_{n\ell m} (r, \theta, \phi) = \sqrt{\left( \frac{2}{na} \right)^3 \frac{(n-\ell-1)!}{2n[(n+\ell)!]^3}} e^{-\frac{r}{na}} \left( \frac{2r}{na}\right)^\ell L_{n-\ell-1}^{2\ell+1} \left(\frac{2r}{na} \right) Y_\ell^m (\theta, \phi).
+\end{equation}

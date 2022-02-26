@@ -1,0 +1,89 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{blubase}
+\begin{document}
+\title{this ONE OBSESSION OF A PROBLEM}
+
+\textbf{Problem 1.} A mass $m$ is free to slide frictionlessly along a wheel of radius $R$ and that rolls without slipping on the ground. The wheel is massless, except for a mass $M$ located
+at its center.
+
+\textbf{Problem 2.} A mass $m$ slides frictionlessly along a wheel of radius $R$, but it is attached to a spring with spring constant $k$ and relaxed length zero, the other end of which is affixed to a point on the rim. Assume the spring is constrained to run along the rim and that the mass can pass freely over the point where the spring is attached to the rim. Find the frequencies of small modes for small oscillations. What happens when $\frac g R = \frac k m$?
+
+\textit{Solution.} Let coordinates $\theta$ be the angular position of the mass relative (counterclockwise) to the point where the spring is attached to the rim, and let $\phi$ be the (clockwise) angular position of the spring's fixed point relative to the positive vertical (with positive upward). (The reason for this particular definition of coordinates is so that the equilibrium points for $\phi = 0, \pi$, and $\theta = 0$.) The positions of the masses are 
+\[
+    \vec r_{center} = R\phi \ihat, \quad \vec r_{rim} = \left(R\phi + R \cos\left(\frac \pi 2 - \phi + \theta \right)\right) \ihat + R \sin\left(\frac \pi 2 - \phi + \theta \right) \jhat
+\]
+The position of the rim mass can be simplified:
+\[
+    \vec r_{rim} = R(\phi + \sin(\phi - \theta)) \ihat + R \cos(\phi - \theta)\jhat
+\]
+The velocities are therefore
+\[
+    \vec v_{center} = R\dot\phi \ihat, \quad \vec v_{rim} = R(\dot \phi + \cos(\phi - \theta) (\dot \phi - \dot \theta)) \ihat - R \sin(\phi - \theta)(\dot \phi - \dot \theta)\jhat
+\]
+The Lagrangian is therefore
+\[
+    \lagr = \frac 12 m R^2 \dot\phi^2 + \frac 12 mR^2 [\dot\phi^2 + 2 \cos(\phi - \theta) \dot \phi (\dot \phi - \dot \theta) + (\dot \phi - \dot \theta)^2] - mgR \cos(\phi - \theta) - \frac 12 kR^2\theta^2
+\]
+We now apply Euler-Lagrange:
+\begin{align*}
+    &\dv{}{t}\left(\pdv{\lagr}{\dot\phi}\right) = \pdv{\lagr}{\phi}\\
+    &\implies \dv{}{t} \left(mR^2 \dot \phi + mR^2 \dot \phi + mR^2 \cos(\phi - \theta)[(\dot \phi - \dot \theta) + \dot \phi] + mR^2(\dot \phi - \dot \theta) \right) \\ 
+    & \quad \quad = - mR^2 \dot \phi (\dot \phi - \dot \theta) \sin(\phi - \theta) + mgR \sin(\phi - \theta)\\
+    &\implies 2R \ddot{\phi} - R\sin(\phi - \theta)(\dot \phi - \dot \theta)(2\dot \phi - \dot \theta) + R \cos(\phi - \theta)(2 \ddot \phi - \ddot \theta) + R (\ddot \phi - \ddot \theta) \\ 
+    & \quad \quad =  - R \dot \phi (\dot \phi - \dot \theta) \sin(\phi - \theta) + g \sin(\phi - \theta)\\
+    & \implies 2R \ddot{\phi} - R \sin(\phi - \theta)(2\dot \phi^2 - 3 \dot \phi \dot \theta + \dot \theta^2) + R \cos(\phi - \theta)(2 \ddot \phi - \ddot \theta) + R (\ddot \phi - \ddot \theta)\\
+    & \quad \quad = - R (\dot \phi^2 - \dot \phi \dot \theta) \sin(\phi - \theta) + g \sin(\phi - \theta)\\
+    & \implies 2R \ddot{\phi} - R \sin(\phi - \theta)(\dot \phi - \dot \theta)^2 + R \cos(\phi - \theta)(2 \ddot \phi - \ddot \theta) + R (\ddot \phi - \ddot \theta) = g \sin(\phi - \theta)
+\end{align*}
+At equilibrium, when $\dot \phi = \ddot \phi = \dot \theta = \ddot \theta = 0$, then necessarily $\sin(\phi - \theta) = 0$. 
+
+For the other equation, we repeat a similar process:
+\begin{align*}
+    &\dv{}{t}\left(\pdv{\lagr}{\dot\theta}\right) = \pdv{\lagr}{\theta}\\
+    &\implies \dv{}{t} \left(-mR^2\cos(\phi - \theta)\dot \phi - mR^2(\dot \phi - \dot \theta)  \right) \\
+    & \quad \quad = mR^2\sin(\phi - \theta)\dot \phi(\dot \phi - \dot \theta) - mgR \sin(\phi - \theta) - kR^2 \theta \\
+    &\implies mR\sin(\phi - \theta)(\dot \phi - \dot \theta)\dot \phi - mR \cos(\phi - \theta) \ddot \phi - mR(\ddot \phi - \ddot \theta) \\
+    & \quad \quad = mR \sin(\phi - \theta)\dot \phi(\dot \phi - \dot \theta) - mg \sin(\phi - \theta) - kR \theta \\
+    & \implies mR \cos(\phi - \theta) \ddot \phi + mR(\ddot \phi - \ddot \theta) = mg \sin(\phi - \theta) + kR\theta
+\end{align*}
+At equilibrium, when $\dot \phi = \ddot \phi = \dot \theta = \ddot \theta = 0$, we have that $mg \sin (\phi - \theta) + kR \theta = 0$, which combined with the previous condition gives $\theta = 0$. Therefore, on the domain $[0, 2\pi)$, $\phi = 0, \pi$, as expected. 
+
+The equilibrium point $\phi = 0, \theta = 0$ is clearly the unstable one, so we turn our attention to the equilibrium point $\phi = \pi$, $\theta = 0$, and consider the first-order approximation $\phi = \pi + \delta$, $\theta = \eps$. In the first equation, using this approximation gives and ignoring second order and higher terms gives
+\[
+   \ddot \delta = -\frac g R (\delta - \eps)
+\]
+and the second equation gives
+\[
+   - \ddot \eps = \frac g R \delta - \left(\frac k m + \frac g R\right) \eps
+\]
+For the shits and giggles, let's do this the matrix way. If $\alpha = \frac g R$ and $\beta = \frac k m$, this system of differential equations can be written as
+\[
+    \begin{bmatrix}
+    \ddot{\delta} \\ \ddot{\eps}  
+    \end{bmatrix} = \begin{bmatrix}
+    - \alpha & \alpha \\ \alpha & -(\beta + \alpha)
+    \end{bmatrix} \begin{bmatrix}
+    \delta \\ \eps  
+    \end{bmatrix}
+\]
+If $\alpha = \beta$, we can pull out the overall factor of $\alpha$ and obtain
+\[
+    \begin{bmatrix}
+    \ddot{\delta} \\ \ddot{\eps}  
+    \end{bmatrix} = \alpha \begin{bmatrix}
+    - 1 & 1 \\ 1 & -2
+    \end{bmatrix} \begin{bmatrix}
+    \delta \\ \eps  
+    \end{bmatrix}
+\]
+Let $A =  \begin{bmatrix}
+    - 1 & 1 \\ 1 & -2
+    \end{bmatrix}$. To calculate the square root of this matrix, we need to find eigenvalues and eigenvectors: 
+\[
+ \det(A - \lambda I) = \begin{vmatrix} (-1 - \lambda) & 1 \\ 1 & (-2-\lambda) \end{vmatrix} = (\lambda + 2)(\lambda + 1) - 1 = \lambda^2 + 3\lambda + 1 = 0
+\]
+\[
+    \implies \lambda_1 = \frac{-3 + \sqrt{5}}{2}, \quad \lambda_2 = \frac{-3 - \sqrt{5}}{2}
+\]
+Notice the appearance of the golden ratio! Or at least, its square -- note that $\lambda_1 = - \varphi^{-2}$, $\lambda_2 = - \varphi^2$, where $\varphi = \frac{1 + \sqrt 5}{2}$. The negative eigenvalues indicate harmonic motion, and the frequencies are therefore are $\varphi\sqrt \alpha$ and $\varphi^{-1} \sqrt \alpha$. 
+\end{document}

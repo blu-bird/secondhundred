@@ -1,0 +1,206 @@
+\section{Basics of Quantum Mechanics}
+The experiments summarized in the previous section necessitated a new formulation of physics. We discuss the postulates of quantum mechanics in the next section. 
+\subsection{Postulates of Quantum Mechanics}
+These are some of the basic postulates of quantum mechanics:
+\begin{postulate}
+\label{post1}
+The state of any particle is represented by a normalized vector $\ket{\psi}$ in a Hilbert space. 
+\end{postulate}
+\begin{postulate}
+\label{post2}
+To each observable $Q$ is associated a Hermitian operator $\hat{Q}$ for which the expectation value of $Q$ in that state is $\bra{\psi}\hat{Q}\ket{\psi}$.
+\end{postulate}
+\begin{postulate}
+\label{post3}
+When measuring the observable $Q$ on a particle whose state is $\ket{\psi}$, the only possible values are the eigenvalues of $\hat{Q}$. The probability of getting a certain eigenvalue $\lambda$, associated with normalized eigenvector $\ket{\lambda}$, is equal to $\norm{\braket{\lambda}{\psi}}^2$. After measurement, the state of the particle will collapse to the eigenvector of $\hat{Q}$ corresponding to the eigenvalue measured.
+\end{postulate}
+Note that the Hermiticity of the operators here is crucial. It guarantees that the eigenvalues, which are the possible results of a measurement, are real. It also means the eigenvectors are orthogonal, which means that, when the state of a particle is an eigenstate, only the eigenvalue associated with the state will be measured. In a finite-dimensional space, Hermiticity also implies that the eigenvectors of the operator span the  space. In an infinite-dimensional space, the operators corresponding to various observables must also satisfy this condition. This could be seen as another postulate. 
+
+There are more postulates, which will be discussed in the next few sections. For now, these are the basic principles we need for our introduction to quantum mechanics. 
+\subsection{The Wavefunction}
+We're primarily going to work in the position basis in this set of lectures. This is an infinite-dimensional basis, since there are infinite possible positions. We'll work in one dimension for now.
+
+We will work in the position basis. Let the eigenstate at position $x$ be $\ket{x}$. Suppose we have a particle in the state $\ket{\psi(t)} $ at time $t$. We define the \textbf{wavefunction} of this state in the position basis to be 
+\begin{equation*}
+\psi (x, t) = \braket{x}{\psi(t)}.
+\end{equation*}
+Since the position basis is orthonormal, we have 
+\begin{equation}
+\ket{\psi(t)} = \int\limits_{-\infty}^{\infty} \ket{x} \braket{x}{\psi(t)} dx = \int\limits_{-\infty}^{\infty} \ket{x} \psi(x, t) dx.
+\end{equation}
+
+The wavefunction gives the probability density of being found at a certain position. The probability that a particle in state $\ket{\psi(t)}$ is found between $x$ and $x+dx$ is 
+\begin{equation*}
+\norm{\braket{x}{\psi(t)}}^2 dx = \norm{\psi(x,t)}^2 dx,
+\end{equation*}
+so the probability that it is found between $x=a$ and $x=b$ is 
+\begin{equation*}
+\int \limits_{a}^{b} \norm{\psi(x,t)}^2 dx.
+\end{equation*}
+Since the particle has to be found \textit{somewhere}, we must have 
+\begin{equation}
+\int \limits_{-\infty}^{\infty} \norm{\psi(x,t)}^2 dx = 1.
+\label{normalization}
+\end{equation}
+Equation \ref{normalization} is the normalization condition.
+
+The expectation value of some operator $\hat{Q}$ is 
+\begin{equation*}
+\bra{\psi(t)} \hat{Q} \ket{\psi(t)} = \int\limits_{-\infty}^{\infty} \braket{\psi(t)}{x}  \braket{x}{\hat{Q} \psi(t)} dx = \int\limits_{-\infty}^{\infty} \psi^*(x,t) \hat{Q} \psi(x,t) dx.
+\end{equation*}
+
+The position operator $\hat{x}$ must satisfy 
+\begin{equation*}
+\hat{x} \ket{x'} = x' \ket{x'}.
+\end{equation*}
+Therefore 
+\begin{equation*}
+\hat{x} \ket{\psi(t)} = \int\limits_{-\infty}^{\infty} \hat{x} \ket{x} \psi(x,t) dx = \int\limits_{-\infty}^{\infty} \ket{x} x \psi(x,t) dx,
+\end{equation*}
+so 
+\begin{equation}
+\hat{x} \psi(x,t) = x \psi(x,t).
+\end{equation}
+\subsection{Schrodinger's Equation and Time Evolution}
+The time evolution of the wavefunction is given by the \textbf{Schrodinger equation}:
+\begin{equation}
+\label{schrodinger}
+i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2} + V(x) \psi.
+\end{equation}
+$V(x)$ is the potential as a function of position. We assume that it is time-independent. Equation \ref{schrodinger} is the quantum-mechanical equivalent of Newton's law: given some initial state, it determines the state for all future times. The operator 
+\begin{equation}
+\hat{H} =  -\frac{\hbar^2}{2m} \frac{\partial^2 }{\partial x^2} + V(\hat{x})
+\label{hamiltonian}
+\end{equation}
+is the Hamiltonian.
+
+We now define a time evolution operator $\hat{U} (t)$ such that 
+\begin{equation*}
+\hat{U} (t) \ket{\psi (0)} = \ket{\psi(t)}.
+\end{equation*} 
+
+In general, substituting into Equation \ref{schrodinger} gives 
+\begin{align*}
+i \hbar \frac{\partial \psi (x,t)}{\partial t} &= \hat{H} \psi (x,t),\\
+i \hbar \frac{\partial \hat{U} \psi (x,0)}{\partial t} &= \hat{H}\hat{U} \psi (x,0),\\
+\left(i\hbar\frac{\partial \hat{U}}{\partial t} - \hat{H}\hat{U} \right) \psi (x,0) &= 0,\\
+i\hbar\frac{\partial \hat{U}}{\partial t} - \hat{H}\hat{U} &= \hat{0}, \\
+i\hbar \frac{\partial \hat{U}}{\partial t} &= \hat{H}\hat{U}. \\
+\end{align*}
+Taking the adjoint of both sides of this equation, we find
+\begin{equation*}
+-i\hbar \frac{\partial \hat{U}^{\dagger}}{\partial t} = \hat{U}^{\dagger} \hat{H}.
+\end{equation*}
+Then 
+\begin{align*}
+\frac{d}{dt} (\hat{U}^{\dagger}\hat{U}) &= \frac{d\hat{U}^{\dagger}}{dt}\hat{U} + \hat{U}^{\dagger} \frac{d\hat{U}}{dt}, \\
+&= \frac{i}{\hbar} \left(\hat{U}^{\dagger} \hat{H} \hat{U} - \hat{U}^{\dagger} \hat{H} \hat{U} \right) \\
+&= 0.
+\end{align*}
+Since 
+\begin{equation*}
+\hat{U}(0) = \hat{I},
+\end{equation*}
+we have
+\begin{equation}
+\hat{U}^{\dagger}\hat{U} = \hat{I}
+\end{equation}
+at all times. Thus time evolution is unitary.
+
+This means that states maintain their normalization over time:
+\begin{equation*}
+\braket{\psi(t)}{\psi(t)} = (\hat{U} (t) \ket{\psi (0)})^{\dagger} \hat{U} (t) \ket{\psi (0)}
+= \bra{\psi(0)} \hat{U}^{\dagger}(t)\hat{U}(t) \ket{\psi(0)} = 1.
+\end{equation*}
+
+For time-independent Hamiltonians, we also find that 
+\begin{equation} \hat{U}(t) = e^{-\frac{i\hat{H} t}{\hbar}}. \end{equation}
+\subsection{Momentum}
+The expectation value of the position is 
+\begin{equation}
+\bra{\psi(t)}\hat{x}\ket{\psi(t)} =  \int\limits_{-\infty}^{\infty} \psi^*(x,t) x \psi(x,t) dx.
+\end{equation} 
+To understand momentum, we consider the change in the expectation value of position over time. We have 
+\begin{align*}
+\frac{d \langle \hat{x} \rangle}{dt} &= \int\limits_{-\infty}^{\infty} x\left(\frac{d\psi^*}{dt}  \psi  +\psi^*  \frac{d\psi}{dt}\right) dx,\\
+\psi \frac{d\psi^*}{dt} &= \psi \frac{i}{\hbar} \left( -\frac{\hbar^2}{2m} \frac{\partial^2 \psi^*}{\partial x^2} + V(x) \psi^* \right),\\
+\psi^* \frac{d\psi}{dt} &= -\psi^* \frac{i}{\hbar} \left( -\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2} + V(x) \psi \right),\\
+\frac{d \langle \hat{x} \rangle}{dt} &= \int\limits_{-\infty}^{\infty} x\frac{i\hbar}{2m} \left(\psi^*\frac{\partial^2 \psi}{\partial x^2}-\psi\frac{\partial^2 \psi^*}{\partial x^2} \right) dx,\\
+&=  \int\limits_{-\infty}^{\infty} x\frac{i\hbar}{2m} \frac{\partial}{\partial x} \left(\psi^*\frac{\partial \psi}{\partial x}-\psi\frac{\partial \psi^*}{\partial x} \right)dx, \\
+&= \frac{i\hbar}{2m} \left[x\left(\psi^*\frac{\partial \psi}{\partial x}-\psi\frac{\partial \psi^*}{\partial x} \right) \Bigg|_{-\infty}^{\infty} -  \int\limits_{-\infty}^{\infty} \left(\psi^*\frac{\partial \psi}{\partial x}-\psi\frac{\partial \psi^*}{\partial x} \right)dx \right],\\
+&= -\frac{i\hbar}{2m}  \int\limits_{-\infty}^{\infty} \left(\psi^*\frac{\partial \psi}{\partial x}-\psi\frac{\partial \psi^*}{\partial x} \right)dx,\\
+&= -\frac{i\hbar}{2m} \left[\int\limits_{-\infty}^{\infty} \psi^*\frac{\partial \psi}{\partial x}dx-\left(\psi \psi^* \Bigg|_{-\infty}^{\infty}-\int\limits_{-\infty}^{\infty}\psi^*\frac{\partial \psi}{\partial x} dx\right)\right],\\
+&= -\frac{i\hbar}{m} \int\limits_{-\infty}^{\infty} \psi^*\frac{\partial \psi}{\partial x}dx.
+\end{align*}
+
+We'd expect the expectation value of momentum to relate to the expectation value of position by the following relation:
+\begin{equation}
+\langle \hat{p} \rangle = m \frac{d\langle \hat{x} \rangle}{dt}.
+\end{equation}
+Therefore 
+\begin{equation*}
+\langle \hat{p} \rangle =  -i\hbar \int\limits_{-\infty}^{\infty} \psi^*\frac{\partial \psi}{\partial x}dx,
+\end{equation*}
+so 
+\begin{equation}
+\hat{p} = -i\hbar \frac{d}{dx}.
+\end{equation}
+This is the momentum operator. 
+\subsection{Energy}
+We can now construct the (non-relativistic) energy operator. Classically, we have
+$$E =  \frac{1}{2} mv^2 + V(x) = \frac{p^2}{2m} + V(x).$$ We can therefore construct the energy operator as 
+$$\hat{E} =  \frac{\hat{p}^2}{2m} + V(\hat{x}) = -\frac{\hbar^2}{2m} \frac{\partial^2 }{\partial x^2} + V(\hat{x}) = \hat{H} $$ as expected. 
+
+Let's now work in the energy basis. Let $\ket{\phi_E (t)}$ be the energy eigenstate with eigenvalue $E$ at time $t=0$. The Schrodinger equation gives 
+\[i\hbar\frac{\partial}{\partial t} \ket{\phi_E} = \hat{H} \ket{E} = E \ket{\phi_E},\]
+so 
+\begin{equation}
+\ket{\phi_E (t)} = e^{-\frac{iEt}{\hbar}} \ket{\phi_E(0)}.
+\label{energyTimeEvolution}
+\end{equation}
+The energy eigenstate \textit{stays} an energy eigenstate with the same eigenvalue. It evolves only by an overall phase, which is immaterial. For this reason, energy eigenstates are called \textbf{stationary states}.
+
+Equation \ref{energyTimeEvolution} allows us to evolve any state over time as long as we're working in the energy basis. Suppose we have some general state $$\ket{\psi(0)} = \sum_{n} c_n \ket{E_n},$$ where $\ket{E_n}$ is an energy eigenstate with energy $E_n$. Then
+\begin{equation}
+\ket{\psi(t)} = \sum_{n} c_n e^{-\frac{iE_nt}{\hbar}} \ket{E_n}.
+\end{equation}
+This means that solving the time-dependent Schrodinger equation is equivalent to solving for the energy eigenstates. For this reason, the energy eigenvalue equation is known as the \textbf{time-independent Schrodinger equation}. The time-independent equation is
+\begin{equation}
+-\frac{\hbar^2}{2m} \frac{d^2 \psi}{d x^2} + V(x) \psi = E \psi.
+\label{timeIndSchrodinger}
+\end{equation}
+Note that we no longer have to solve a partial differential equation. Equation \ref{timeIndSchrodinger} can still only be solved exactly in a few cases.
+\subsection{Generalized Uncertainty Principle}
+We define the uncertainty of some operator $\hat{A}$ in state $\ket{\psi}$ to be 
+\begin{equation}
+\Delta A = \sqrt{\langle \hat{A}^2 \rangle  - \langle \hat{A} \rangle^2}.
+\end{equation}
+
+We can write 
+\begin{equation*}
+(\Delta A)^2 = \langle \hat{A}^2 \rangle  - \langle \hat{A} \rangle^2 = \braket {(\hat{A} - \langle A \rangle ) \psi} {(\hat{A} - \langle A \rangle ) \psi} = \braket {f}{f},
+\end{equation*}
+where $f = (\hat{A} - \langle A \rangle ) \psi$. For another operator $\hat{B}$, we can write 
+\begin{equation*}
+(\Delta B)^2 = \braket{g}{g}
+\end{equation*}
+for $g = (\hat{B} - \langle B \rangle ) \psi$.
+
+Using the Schwarz inequality, we get 
+\begin{align}
+(\Delta A)^2(\Delta B)^2 &= \braket{f}{f} \braket{g}{g} \geq \norm{\braket{f}{g}}^2,\nonumber\\
+&\geq (\operatorname{Im} (\braket{f}{g}))^2 = \left[\frac{1}{2i}\left(\braket{f}{g}-\braket{g}{f} \right) \right]^2,\nonumber\\
+\braket{f}{g} &= \braket{(\hat{A} - \langle A \rangle ) \psi}{(\hat{B} - \langle B \rangle ) \psi}, \\
+&= \expvalue{\hat{A}\hat{B}} + \expvalue{A}\expvalue{B}, \nonumber \\
+\braket{g}{f} &=  \expvalue{\hat{B}\hat{A}} + \expvalue{A}\expvalue{B},\nonumber \\
+(\Delta A)^2(\Delta B)^2 &\geq \left(\frac{1}{2i} \expvalue{\commutator{\hat{A}}{\hat{B}}}\right)^2. \label{uncertainty}
+\end{align}
+Equation \ref{uncertainty} is the \textbf{generalized uncertainty principle}. 
+
+In the case that the operators in question are position and momentum, we find
+\begin{equation}
+\Delta x \Delta p \geq \frac{\hbar}{2}.
+\end{equation}
+This is the well-known \textbf{Heisenberg uncertainty principle}.
+
+In general, operators that do not commute correspond to \textbf{incompatible observables} for which there is some uncertainty principle: you cannot know the values of both simultaneously to arbitrarily low precision. 
